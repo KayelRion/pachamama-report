@@ -109,6 +109,25 @@ figcaption{font-family:var(--f-ui);font-size:11.5px;color:var(--ink-3);line-heig
 
 .kpis.k3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width:560px){.kpis.k3{grid-template-columns:1fr}}
+/* Competitor table: stacks into cards on narrow screens */
+.tw.comp td{white-space:normal}
+@media (max-width:640px){.tw.comp table,.tw.comp tbody,.tw.comp tr,.tw.comp td{display:block;width:100%}.tw.comp thead{display:none}.tw.comp tr{padding:10px 12px;border-bottom:1px solid var(--rule)}.tw.comp td{border:0;padding:2px 0;text-align:left}.tw.comp td::before{content:attr(data-l);display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}}
+/* Rating scale */
+.rate{padding:28px 8px 6px;--lo:3.5;--hi:5.0;overflow:hidden}
+.rate-track{position:relative;height:170px;border-bottom:2px solid var(--rule)}
+.rate-band,.rate-us,.rate-dots i,.rate-axis span{--x:calc((var(--v,var(--from)) - var(--lo)) / (var(--hi) - var(--lo)) * 100%)}
+.rate-band{position:absolute;bottom:0;top:0;left:calc((var(--from) - var(--lo)) / (var(--hi) - var(--lo)) * 100%);width:calc((var(--to) - var(--from)) / (var(--hi) - var(--lo)) * 100%);background:color-mix(in srgb,var(--s3) 18%,transparent);border-left:2px solid var(--s3);border-right:2px solid var(--s3);border-radius:4px 4px 0 0}
+.rate-band span{position:absolute;top:-22px;right:0;text-align:right;font-family:var(--f-ui);font-size:12px;font-weight:600;color:var(--good);white-space:nowrap}
+.rate-dots i{position:absolute;left:var(--x);bottom:calc(var(--y) * 1px);width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--s3);border:2px solid var(--surface);transition:transform .8s cubic-bezier(.2,.7,.2,1),opacity .8s}
+.rate-us{position:absolute;left:var(--x);bottom:0;top:8px;width:0;border-left:3px solid var(--s1);transition:left 1.2s cubic-bezier(.2,.7,.2,1)}
+.rate-us b{position:absolute;top:-6px;right:10px;font-family:var(--f-display);font-size:40px;line-height:1;color:var(--s1)}
+.rate-us span{position:absolute;top:36px;right:10px;font-family:var(--f-ui);font-size:12px;font-weight:600;color:var(--s1);white-space:nowrap}
+.rate-axis{position:relative;height:22px;font-family:var(--f-ui);font-size:12px;color:var(--ink-3)}
+.rate-axis span{position:absolute;left:var(--x);transform:translateX(-50%);top:4px}
+.rate-axis span:first-child{transform:none}.rate-axis span:last-child{transform:translateX(-100%)}
+.js .rate-fig.pre .rate-us{left:0}
+.js .rate-fig.pre .rate-dots i{transform:translateY(-60px);opacity:0}
+@media (prefers-reduced-motion:reduce){.rate-us,.rate-dots i{transition:none}}
 /* Tables */
 .tw{overflow-x:auto;border:1px solid var(--rule);border-radius:6px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;font-family:var(--f-ui);font-size:13.5px;font-variant-numeric:tabular-nums}
@@ -196,7 +215,7 @@ footer .label{color:var(--band-ink-2)}
     <div class="kpi"><span class="v up num" data-count="10.6" data-dec="1" data-suf="×">10.6×</span><span class="d">Instagram views, Aug–Oct 2026 vs 2025</span></div>
     <div class="kpi"><span class="v up num" data-count="300" data-pre="~">~300</span><span class="d">website users a day since mid-Aug, from ~150</span></div>
     <div class="kpi"><span class="v up num" data-count="48" data-pre="+" data-suf="%">+48%</span><span class="d">people with open bookings, Oct 2 → Oct 23</span></div>
-    <div class="kpi"><span class="v up num" data-count="11.9" data-dec="1" data-pre="+" data-suf="%">+11.9%</span><span class="d">Liberia airport arrivals, Jan–Sep 2026</span></div>
+    <div class="kpi"><span class="v up num" data-count="10" data-suf="×">10×</span><span class="d">Instagram + Facebook conversations, Jul–Oct 2026 vs 2025 (913 vs 91)</span></div>
   </div>
   <div class="row">
     <figure class="c12 rv"><h3>Website users doubled in August, and held<small>Average daily users per week, 2026 vs 2025</small></h3>
@@ -219,7 +238,7 @@ footer .label{color:var(--band-ink-2)}
       <figcaption>Retreat Guru, program 4253. October to the 22nd.</figcaption></figure>
     <figure class="c4 rv"><h3>Guanacaste is the growth region<small>Air arrivals via Liberia (LIR), thousands</small></h3>
       <div class="cv s"><canvas id="cLir" aria-label="Liberia air arrivals"></canvas></div>
-      <figcaption>ICT/CET. 2026 = Jan–Sep. Canada +24%, Europe +7%.</figcaption></figure>
+      <figcaption>ICT/CET. 2026: solid = Jan–Sep actual, faded = projected full year at the +11.9% pace (~1.01M). Canada +24%, Europe +7%.</figcaption></figure>
     <figure class="c4 rv"><h3>Ads that pay back<small>Return and cost, best performers</small></h3>
       <div class="kpis" style="grid-template-columns:1fr;gap:8px">
         <div class="kpi"><span class="v num">3.5×</span><span class="d">return on spend, Google "Visit PachaMama" (Oct 5–18)</span></div>
@@ -229,7 +248,7 @@ footer .label{color:var(--band-ink-2)}
   <div class="row">
     <figure class="c8 rv"><h3>New followers every month, and most stay<small>Instagram follows per month</small></h3>
       <div class="cv"><canvas id="cFollows" aria-label="Instagram follows per month"></canvas></div>
-      <figcaption>Meta Business Suite (follows series starts Nov 2025). Oct 2026 = 27 days.</figcaption></figure>
+      <figcaption>Meta Business Suite, Dec 2025 → Oct 2026. Oct 2026 = 27 days.</figcaption></figure>
     <div class="c4 kpis rv" style="grid-template-columns:1fr;align-content:start">
       <div class="kpi"><span class="v up num" data-count="50536">50,536</span><span class="d">Instagram followers, Oct 27</span></div>
       <div class="kpi"><span class="v up num" data-count="6242" data-pre="+">+6,242</span><span class="d">net new followers in 90 days (+14.2%)</span></div>
@@ -286,9 +305,10 @@ footer .label{color:var(--band-ink-2)}
     <div class="cv t"><canvas id="cOrganic" aria-label="Organic and direct visits per month"></canvas></div>
     <figcaption>GA4. May–Oct organic: 48,066 (2023) → 9,100 (2026). On 13 Mar 2025 organic halved overnight, the day the large Meta campaign ended and Google's March update began.</figcaption></figure>
   <div class="row">
-    <figure class="c7 rv"><h3>Where the search visits were lost<small>Organic sessions lost, 2023-24 → 2025-26</small></h3>
-      <div class="cv t"><canvas id="cPages" aria-label="Organic losses by page"></canvas></div>
-      <figcaption>GA4 landing pages. Homepage = mostly brand searches. "(old)" pages were renamed; redirects work but traffic didn't follow.</figcaption></figure>
+    <figure class="c7 rv"><h3>More visits, more profit, month after month<small>Each dot = one month, Nov 2023 → Aug 2026</small></h3>
+      <div class="legend"><span><i style="background:var(--s2)"></i>2023-24</span><span><i style="background:var(--s3)"></i>2024-25</span><span><i style="background:var(--s1)"></i>2025-26</span><span><i class="ln" style="background:var(--ink-3)"></i>Trend</span></div>
+      <div class="cv t"><canvas id="cProfitLink" aria-label="Website visits vs workshop profit by month"></canvas></div>
+      <figcaption>GA4 website sessions per month vs workshop profit to PachaMama that month (income sheets). 29 months, correlation 0.71. High season lifts both, and 2025-26 sits lowest on both.</figcaption></figure>
     <figure class="c5 rv"><h3>Fewer people search our name<small>Google clicks, Jul–Oct, 2025 vs 2026</small></h3>
       <div class="legend"><span><i style="background:var(--base)"></i>2025</span><span><i style="background:var(--s2)"></i>2026</span></div>
       <div class="cv t"><canvas id="cBrand" aria-label="Brand and non-brand clicks"></canvas></div>
@@ -316,7 +336,7 @@ footer .label{color:var(--band-ink-2)}
       <figcaption>ICT. 2025 +0.8%. 2026 Jan–Sep +4.8% but flat since April; US −13.7% in August. Panama +29%, Colombia +50% in 2025.</figcaption></figure>
     <div class="c6 kpis rv" style="grid-template-columns:repeat(2,minmax(0,1fr));align-content:start">
       <div class="kpi"><span class="v down num">48</span><span class="d">US consumer sentiment (Oct), near record low</span></div>
-      <div class="kpi"><span class="v down num">+22%</span><span class="d">US airfares year on year (fuel, Iran war)</span></div>
+      <div class="kpi"><span class="v down num">+22%</span><span class="d">US airfares year on year (fuel costs)</span></div>
       <div class="kpi"><span class="v up num">+17%</span><span class="d">trip budgets of travellers who still go (higher income)</span></div>
       <div class="kpi"><span class="v num">Level 2</span><span class="d">US travel advisory (crime); homicides down in 2026</span></div>
     </div>
@@ -325,19 +345,29 @@ footer .label{color:var(--band-ink-2)}
     <div class="legend"><span><i style="background:var(--gold)"></i>PachaMama</span><span><i style="background:var(--s1)"></i>Nosara / San Juanillo area</span><span><i style="background:var(--s2)"></i>Elsewhere in Costa Rica</span></div>
     <div class="cv t"><canvas id="cComp" aria-label="Competitors by founding year"></canvas></div>
     <figcaption>Founding years from each operator's site, directories and press; some are self-reported. Eterna (San Juanillo) has no public date; shown as 2026. Hover for names.</figcaption></figure>
-  <div class="row">
-    <div class="c7 tw rv"><table><thead><tr><th>Our offer</th><th>Closest competitors</th><th class="r">Their price</th></tr></thead><tbody>
-      <tr><td>Silent retreats</td><td>EcoMaste, Sat Yoga Ashram</td><td class="r">from $1,850</td></tr>
-      <tr><td>Body Cleanse / fasting</td><td>Paradise Wellness, Tierra Encantada, Blue Spirit</td><td class="r">$1,497–3,547</td></tr>
-      <tr><td>Breathwork training</td><td>Peace Retreat, Awake (Uvita)</td><td class="r">$951–1,450</td></tr>
-      <tr><td>Tantra &amp; residencies</td><td>Tierramor (Nosara)</td><td class="r">n/p</td></tr>
-      <tr><td>Ceremony</td><td>Rythmia, Soltara, Yacumama</td><td class="r">$3,850–6,900/wk</td></tr>
-      <tr><td>Volunteer exchange</td><td>Rancho Mastatal, EcoMaste, Tierramor</td><td class="r">work trade</td></tr>
+  <div class="tw comp rv"><table><thead><tr><th>Our offer</th><th>Closest competitors</th><th class="r">Their price</th></tr></thead><tbody>
+      <tr><td data-l="Our offer">Silent retreats</td><td data-l="Closest competitors">EcoMaste, Sat Yoga Ashram</td><td class="r" data-l="Their price">from $1,850</td></tr>
+      <tr><td data-l="Our offer">Body Cleanse / fasting</td><td data-l="Closest competitors">Paradise Wellness, Tierra Encantada, Blue Spirit</td><td class="r" data-l="Their price">$1,497–3,547</td></tr>
+      <tr><td data-l="Our offer">Breathwork training</td><td data-l="Closest competitors">Peace Retreat, Awake (Uvita)</td><td class="r" data-l="Their price">$951–1,450</td></tr>
+      <tr><td data-l="Our offer">Tantra &amp; residencies</td><td data-l="Closest competitors">Tierramor (Nosara)</td><td class="r" data-l="Their price">not published</td></tr>
+      <tr><td data-l="Our offer">Ceremony</td><td data-l="Closest competitors">Rythmia, Soltara, Yacumama</td><td class="r" data-l="Their price">$3,850–6,900 / week</td></tr>
+      <tr><td data-l="Our offer">Volunteer exchange</td><td data-l="Closest competitors">Rancho Mastatal, EcoMaste, Tierramor</td><td class="r" data-l="Their price">work trade</td></tr>
     </tbody></table></div>
-    <figure class="c5 rv"><h3>Reviews are our weak spot<small>Retreat Guru centre rating</small></h3>
-      <div class="cv xs"><canvas id="cRating" aria-label="Retreat Guru ratings"></canvas></div>
-      <figcaption>Retreat Guru Costa Rica meditation page. We rank first for "silent retreat costa rica" on the marketplaces.</figcaption></figure>
-  </div>
+  <figure class="rv rate-fig" id="rateFig"><h3>Reviews are our weak spot<small>Retreat Guru centre rating, out of 5</small></h3>
+    <div class="rate" aria-label="Competitor ratings 4.61 to 5.00; PachaMama 4.22">
+      <div class="rate-track">
+        <div class="rate-band" style="--from:4.6;--to:5.0"><span>Where competitors sit · 4.6 – 5.0</span></div>
+        <div class="rate-dots" id="rateDots"></div>
+        <div class="rate-us" style="--v:4.22"><b>4.22</b><span>PachaMama</span></div>
+      </div>
+      <div class="rate-axis"><span style="--v:3.5">3.5</span><span style="--v:4.0">4.0</span><span style="--v:4.5">4.5</span><span style="--v:5.0">5.0</span></div>
+    </div>
+    <div class="kpis k3" style="gap:8px">
+      <div class="kpi"><span class="v down num">4.22</span><span class="d">PachaMama, lowest of the centres on the Costa Rica meditation page</span></div>
+      <div class="kpi"><span class="v num">4.6 – 5.0</span><span class="d">where competitors sit (Peace Retreat 4.73 · Tierramor 4.61 · Rythmia 5.00 · Soltara 4.98 · Ananda 4.99)</span></div>
+      <div class="kpi"><span class="v up num">#1</span><span class="d">we still rank first for "silent retreat costa rica" on the marketplaces</span></div>
+    </div>
+    <figcaption>Retreat Guru centre ratings, Oct 2026. Getting more reviews from happy guests is the fastest fix (Ren's area).</figcaption></figure>
 </div></div>
 
 <!-- ================= ACT V ================= -->
@@ -437,10 +467,10 @@ const regPeriods=[['2026-06-21','2026-07-01',.5],['2026-07-01','2026-07-22',.238
 const regWk=wk26.map(w=>{const mid=new Date(w[0]+'T12:00:00Z').getTime()+3*864e5;const p=regPeriods.find(p=>mid>=new Date(p[0]).getTime()&&mid<new Date(p[1]).getTime());return p?p[2]:null});
 const igViews={l:['202508','202509','202510','202511','202512','202601','202602','202603','202604','202605','202606','202607','202608','202609','202610'],v:[30879,84990,99216,645741,224613,121998,91004,111182,88384,43271,48335,103527,584144,518894,1173371]};
 const weekly={l:['Oct 2','Oct 9','Oct 16','Oct 23'],p:[88,95,110,130],vis:[35,43,54,67],vol:[30,30,34,36]};
-const follows={l:['202511','202512','202601','202602','202603','202604','202605','202606','202607','202608','202609','202610'],v:[3497,1388,866,696,770,845,663,560,1401,3332,2546,2171]};
+const follows={l:['202512','202601','202602','202603','202604','202605','202606','202607','202608','202609','202610'],v:[1388,866,696,770,845,663,560,1401,3332,2546,2171]};
 const msgs={l:['202501','202502','202503','202504','202505','202506','202507','202508','202509','202510','202511','202512','202601','202602','202603','202604','202605','202606','202607','202608','202609','202610'],v:[58,97,64,30,46,24,3,30,18,40,111,63,44,33,50,42,28,16,186,279,170,278]};
 const volApps={l:['Aug','Sep','Oct*'],v:[32,40,52]};
-const lir={l:['2019','2022','2024','2025','2026*'],v:[599,662,881,905,770]};
+const lir={l:['2019','2022','2024','2025','2026'],v:[599,662,881,905,770],proj:1013};
 const seasons={l:['2021-22','2022-23','2023-24','2024-25','2025-26'],v:[957,802,932,712,564]};
 const seasonIdx={l:['2023-24','2024-25','2025-26'],users:[100,89,61],guests:[100,76,61]};
 const profit={l:['2024-25','2025-26'],w:[224.2,159.0],c:[115.3,76.8]};
@@ -448,12 +478,13 @@ const orgM=['202305','202306','202307','202308','202309','202310','202311','2023
 const org=[8060,8088,8418,7722,7525,8253,10999,11557,11389,8327,7876,6735,6110,5704,5465,5474,5216,5658,7035,7186,6656,5301,4174,2361,2298,2206,2393,2139,2007,2342,2700,3134,3659,2727,2445,1918,1680,1552,1571,1603,1320,1374];
 const dirE=[null,null,null,null,null,null,2789,3080,3561,2896,2626,2078,1794,1973,2376,1872,1974,2278,3494,3772,4330,3321,3199,1834,1815,1438,1475,1121,970,1426,1819,1671,1634,1246,1197,916,793,667,671,897,749,842];
 const pages=[['Homepage',21533],['/eco-village/',2894],['/work-exchange (old)',2772],['/yearly-schedule (old)',2650],['/community/',2601],['/pachamama-school/',1982],['Blog: astrology',1948],['/sweatlodge (old)',1775],['Blog: moon dance',1650],['/sweatlodge-ceremony/',1175]];
+const profitLink=[['202311',20786,16155,0],['202312',21803,54967,0],['202401',22694,54541,0],['202402',17327,35704,0],['202403',16464,22214,0],['202404',13671,14109,0],['202405',12258,8200,0],['202406',13050,5403,0],['202407',13491,30561,0],['202408',13624,3469,0],['202411',20788,18873,1],['202412',19667,51099,1],['202501',28194,36903,1],['202502',24162,40508,1],['202503',22064,23718,1],['202504',12441,20760,1],['202505',11000,11556,1],['202507',9001,6231,1],['202508',7578,8366,1],['202511',13130,21313,2],['202512',13691,36426,2],['202601',12969,32752,2],['202602',10734,34512,2],['202603',9068,7749,2],['202604',6410,13720,2],['202605',5861,5812,2],['202606',5410,2239,2],['202607',5352,3365,2],['202608',8037,1331,2]];
 const brand={l:['"pachamama costa rica"','All brand searches','Non-brand searches'],a:[1905,3874,1790],b:[933,2879,1223]};
 const fx={l:['2019','2020','2021','2022','2023','2024','2025','2026'],v:[587,585,621,647,544,515,504,463]};
 const colon={l:['Q2 2024','Q2 2025','Q2 2026'],v:[672,651,601]};
 const arrivals={l:['2019','2020','2021','2022','2023','2024','2025'],v:[3.139,1.012,1.347,2.350,2.751,2.919,2.944]};
 // lanes: 0 eco-village/community, 1 yoga & YTT, 2 plant medicine, 3 meditation/detox/wellness
-const comp=[['Durika',1989,0,0],['Nosara Yoga Institute',1994,1,1],['PachaMama',1999,0,2],['Rancho Mastatal',2001,0,0],['Sat Yoga Ashram',2009,3,0],['La Ecovilla',2011,0,0],['Bodhi Tree',2014,1,1],['Rythmia',2016,2,0],['Soltara',2018,2,0],['Alegría Village',2018,0,0],['Yacumama',2019,2,0],['EcoMaste',2020,3,0],['Shift Esperanza',2020,0,1],['Tierramor',2021,0,1],['The ARK',2021,0,0],['Awake (Uvita)',2022,3,0],['Eterna',2026,0,1]];
+const comp=[['PachaMama',1999,0,2],['Rancho Mastatal',2001,0,0],['Sat Yoga Ashram',2009,3,0],['La Ecovilla',2011,0,0],['Bodhi Tree',2014,1,1],['Rythmia',2016,2,0],['Soltara',2018,2,0],['Alegría Village',2018,0,0],['Yacumama',2019,2,0],['EcoMaste',2020,3,0],['Shift Esperanza',2020,0,1],['Tierramor',2021,0,1],['The ARK',2021,0,0],['Awake (Uvita)',2022,3,0],['Eterna',2026,0,1]];
 const lanesShort=['Eco-village','Yoga / YTT','Plant med.','Meditation'];
 const lanes=['Eco-village & community','Yoga & teacher training','Plant medicine','Meditation, detox & wellness'];
 const ratings=[['Most competitors (range)',4.6,5.0],['PachaMama',4.22,4.22]];
@@ -468,6 +499,8 @@ status.forEach(s=>{const d=document.createElement('div');d.style.flexGrow=s[1];d
   const l=document.createElement('span');l.innerHTML='<i style="background:var('+s[2]+')"></i>'+s[0]+' <b class="num">'+s[1]+'</b>';pl.appendChild(l)});
 const fu=document.getElementById('funnel');funnel.forEach(f=>{const r=document.createElement('div');r.className='frow '+f[2];r.innerHTML='<span>'+f[0]+'</span><span class="bar"><i style="width:'+Math.max(1,f[1]/funnel[0][1]*100)+'%" data-w="'+Math.max(1,f[1]/funnel[0][1]*100)+'"></i></span><span class="n">'+fmt(f[1])+'</span>';fu.appendChild(r)});
 
+const rateDots=[['Tierramor',4.61],['Peace Retreat',4.73],['Soltara',4.98],['Ananda Lodge',4.99],['Rythmia',5.0],['Tierra Encantada',5.0]];
+(function(){const el=document.getElementById('rateDots');if(!el)return;rateDots.forEach((d,i)=>{const n=document.createElement('i');n.style.setProperty('--v',d[1]);n.style.setProperty('--y',22+(i%3)*36);n.style.transitionDelay=(0.15+i*0.08)+'s';n.title=d[0]+' '+d[1].toFixed(2);el.appendChild(n)})})();
 /* ---------------- scroll: progress, active act, parallax ---------------- */
 const prog=document.getElementById('prog'),bigs=[...document.querySelectorAll('.act .big')],acts=[...document.querySelectorAll('section.act')],links=[...document.querySelectorAll('nav.bar a')];
 let ticking=false;
@@ -498,10 +531,10 @@ mk.cIgViews=()=>{const o=base();o.scales.y.ticks.callback=v=>v>=1e6?(v/1e6)+'M':
   const s3=css('--s3');return {type:'bar',data:{labels:igViews.l.map(ym),datasets:[bar(igViews.v.map((v,i)=>i>=12?s3:s3+'80'),igViews.v)]},options:o}};
 mk.cWeekly=()=>{const o=base();o.scales.x.stacked=true;o.scales.y.stacked=true;o.plugins.tooltip.callbacks.footer=it=>'Total: '+weekly.p[it[0].dataIndex];const surf=css('--surface');
   return {type:'bar',data:{labels:weekly.l,datasets:[bar(css('--s2'),weekly.vis,{label:'Visitors',borderRadius:0,borderColor:surf,borderWidth:{top:2}}),bar(css('--s3'),weekly.vol,{label:'Volunteers',borderRadius:0,borderColor:surf,borderWidth:{top:2}}),bar(css('--base'),weekly.p.map((p,i)=>p-weekly.vis[i]-weekly.vol[i]),{label:'Other'})]},options:o}};
-mk.cFollows=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+fmt(i.raw)+' new follows'+(i.dataIndex===11?' (27 days)':'');const s3=css('--s3');return {type:'bar',data:{labels:follows.l.map(ym),datasets:[bar(follows.v.map((v,i)=>i>=8?s3:s3+'80'),follows.v)]},options:o}};
+mk.cFollows=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+fmt(i.raw)+' new follows'+(i.dataIndex===10?' (27 days)':'');const s3=css('--s3');return {type:'bar',data:{labels:follows.l.map(ym),datasets:[bar(follows.v.map((v,i)=>i>=7?s3:s3+'80'),follows.v)]},options:o}};
 mk.cMsgs=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+i.raw+' conversations'+(i.dataIndex===21?' (27 days)':'');const s2=css('--s2');return {type:'bar',data:{labels:msgs.l.map(ym),datasets:[bar(msgs.v.map((v,i)=>i>=18?s2:s2+'80'),msgs.v,{maxBarThickness:30})]},options:o}};
 mk.cVolApps=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+i.raw+' applications'+(i.dataIndex===2?' (to Oct 22)':'');return {type:'bar',data:{labels:volApps.l,datasets:[bar(css('--s3'),volApps.v)]},options:o}};
-mk.cLir=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+i.raw+'K air arrivals'+(i.dataIndex===4?' (Jan–Sep)':'');const s3=css('--s3');return {type:'bar',data:{labels:lir.l,datasets:[bar(lir.v.map((v,i)=>i===4?s3+'99':s3),lir.v)]},options:o}};
+mk.cLir=()=>{const o=base();o.scales.x.stacked=true;o.scales.y.stacked=true;o.interaction={mode:'nearest',intersect:true};o.plugins.tooltip.callbacks.label=i=>i.datasetIndex===0?' '+i.raw+'K air arrivals'+(i.dataIndex===4?' (Jan–Sep actual)':''):' ~'+lir.proj+'K projected full year (+11.9% pace)';const s3=css('--s3');return {type:'bar',data:{labels:lir.l,datasets:[bar(s3,lir.v,{borderRadius:lir.v.map((v,i)=>i===4?0:{topLeft:4,topRight:4})}),bar(s3+'40',lir.v.map((v,i)=>i===4?lir.proj-v:null),{borderColor:s3,borderWidth:1.5,borderDash:[4,3]})]},options:o}};
 mk.cLink=()=>{const o=base();o.plugins.marker={index:11,text:'Aug 17'};o.scales.y.ticks.callback=v=>v;o.plugins.tooltip.callbacks.label=i=>' '+i.dataset.label+': '+(i.raw==null?'n/a':Math.round(i.raw));
   return {type:'line',plugins:[marker],data:{labels:wkLbl,datasets:[
    {label:'Users (index)',data:wk26.map(w=>w[1]/150*100),borderColor:css('--s2'),borderWidth:2.5,pointRadius:0,pointHoverRadius:5,tension:.3},
@@ -514,8 +547,14 @@ mk.cProfit=()=>{const o=base();o.indexAxis='y';o.interaction={mode:'index',inter
   return {type:'bar',data:{labels:profit.l,datasets:[{label:'Workshops',data:profit.w,backgroundColor:css('--s2'),borderColor:surf,borderWidth:{right:2},barPercentage:.6},{label:'Ceremonies & events',data:profit.c,backgroundColor:css('--s1'),borderRadius:{topRight:4,bottomRight:4},borderSkipped:'left',barPercentage:.6}]},options:o}};
 mk.cOrganic=()=>{const o=base();o.plugins.marker={index:orgM.indexOf('202503'),text:'13 Mar 2025'};o.plugins.tooltip.callbacks.label=i=>' '+i.dataset.label+': '+(i.raw==null?'n/a':fmt(i.raw));
   return {type:'line',plugins:[marker],data:{labels:orgM.map(ym),datasets:[{label:'Organic search',data:org,borderColor:css('--s3'),backgroundColor:css('--s3')+'22',fill:true,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,tension:.3},{label:'Direct (engaged)',data:dirE,borderColor:css('--s2'),borderWidth:2,pointRadius:0,pointHoverRadius:5,tension:.3}]},options:o}};
-mk.cPages=()=>{const o=base();o.indexAxis='y';o.interaction={mode:'nearest',intersect:true,axis:'y'};o.scales={x:{grid:{color:css('--rule')},border:{display:false},ticks:{color:css('--ink-3'),callback:v=>fmt(v)}},y:{grid:{display:false},ticks:{color:css('--ink-2'),autoSkip:false,callback:shortLbl}}};
-  o.plugins.tooltip.callbacks.label=i=>' '+fmt(i.raw)+' fewer sessions';return {type:'bar',data:{labels:pages.map(p=>p[0]),datasets:[hbar(css('--s1'),pages.map(p=>p[1]))]},options:o}};
+mk.cProfitLink=()=>{const o=base();o.interaction={mode:'nearest',intersect:true};
+  const xs=profitLink.map(r=>r[1]),ys=profitLink.map(r=>r[2]);const mx=xs.reduce((a,b)=>a+b)/xs.length,my=ys.reduce((a,b)=>a+b)/ys.length;const b=xs.reduce((a,x,i)=>a+(x-mx)*(ys[i]-my),0)/xs.reduce((a,x)=>a+(x-mx)**2,0),a0=my-b*mx;
+  o.scales={x:{type:'linear',min:4000,max:30000,grid:{color:css('--rule')},border:{display:false},title:{display:true,text:'Website visits that month',color:css('--ink-3')},ticks:{color:css('--ink-3'),callback:v=>(v/1000)+'K'}},y:{min:0,grid:{color:css('--rule')},border:{display:false},title:{display:true,text:'Workshop profit to PachaMama',color:css('--ink-3')},ticks:{color:css('--ink-3'),callback:v=>'$'+(v/1000)+'K'}}};
+  o.plugins.tooltip.callbacks={title:()=>'',label:i=>i.datasetIndex===3?' Trend':' '+ym(i.raw.m)+': '+fmt(i.raw.x)+' visits · $'+fmt(i.raw.y)};
+  const surf=css('--surface'),cols=[css('--s2'),css('--s3'),css('--s1')];
+  const ds=[0,1,2].map(k=>({label:['2023-24','2024-25','2025-26'][k],data:profitLink.filter(r=>r[3]===k).map(r=>({x:r[1],y:r[2],m:r[0]})),backgroundColor:cols[k],borderColor:surf,borderWidth:2,pointRadius:7,pointHoverRadius:9}));
+  ds.push({type:'line',label:'Trend',data:[{x:5000,y:Math.max(0,a0+b*5000)},{x:29000,y:a0+b*29000}],borderColor:css('--ink-3'),borderDash:[6,4],borderWidth:2,pointRadius:0,fill:false});
+  return {type:'scatter',data:{datasets:ds},options:o}};
 mk.cBrand=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+i.dataset.label+': '+fmt(i.raw)+' clicks';o.scales.x.ticks.autoSkip=false;o.scales.x.ticks.callback=function(v){const l=this.getLabelForValue(v);return l.length>14?l.split(' ').reduce((a,w)=>{const L=a[a.length-1];if((L+' '+w).trim().length>14)a.push(w);else a[a.length-1]=(L+' '+w).trim();return a},['']):l};
   return {type:'bar',data:{labels:brand.l,datasets:[bar(css('--base'),brand.a,{label:'2025'}),bar(css('--s2'),brand.b,{label:'2026'})]},options:o}};
 mk.cFx=()=>{const o=base();o.scales.y.beginAtZero=false;o.scales.y.suggestedMin=420;o.scales.y.ticks.callback=v=>'₡'+v;o.plugins.tooltip.callbacks.label=i=>' ₡'+i.raw+' per US$';const s1=css('--s1');
@@ -524,7 +563,7 @@ mk.cColon=()=>{const o=base();o.scales.y.beginAtZero=false;o.scales.y.suggestedM
   return {type:'bar',data:{labels:colon.l,datasets:[bar(colon.v.map((v,i)=>i===2?s1:s2),colon.v,{borderSkipped:'start'})]},options:o}};
 mk.cArrivals=()=>{const o=base();o.scales.y.ticks.callback=v=>v+'M';o.plugins.tooltip.callbacks.label=i=>' '+i.raw.toFixed(2)+'M arrivals';return {type:'bar',data:{labels:arrivals.l,datasets:[bar(css('--s2'),arrivals.v)]},options:o}};
 mk.cComp=()=>{const o=base();o.interaction={mode:'nearest',intersect:true};
-  o.scales={x:{type:'linear',min:1986,max:2028,grid:{color:css('--rule')},border:{display:false},ticks:{color:css('--ink-3'),stepSize:5,maxRotation:0,callback:v=>String(v)}},y:{type:'linear',min:-.6,max:3.6,reverse:true,grid:{color:css('--rule')},border:{display:false},ticks:{stepSize:1,color:css('--ink-2'),callback:function(v){return (this.chart.width<560?lanesShort:lanes)[v]||''}}}};
+  o.scales={x:{type:'linear',min:1997,max:2028,grid:{color:css('--rule')},border:{display:false},ticks:{color:css('--ink-3'),stepSize:5,maxRotation:0,callback:v=>String(v)}},y:{type:'linear',min:-.6,max:3.6,reverse:true,grid:{color:css('--rule')},border:{display:false},ticks:{stepSize:1,color:css('--ink-2'),callback:function(v){return (this.chart.width<560?lanesShort:lanes)[v]||''}}}};
   o.plugins.tooltip.callbacks={title:()=>'',label:i=>' '+i.raw.n+' · '+(i.raw.n==='Eterna'?'new (no public date)':i.raw.x)};
   const jit=(n)=>{let h=0;for(const ch of n)h=(h*31+ch.charCodeAt(0))%997;return (h%5-2)*0.09};
   const grp=k=>comp.filter(c=>c[3]===k).map(c=>({x:c[1],y:c[2]+jit(c[0]),n:c[0]}));
@@ -534,9 +573,6 @@ mk.cComp=()=>{const o=base();o.interaction={mode:'nearest',intersect:true};
     {label:'Nosara area',data:grp(1),backgroundColor:css('--s1'),borderColor:surf,borderWidth:2,pointRadius:7,pointHoverRadius:9},
     {label:'PachaMama',data:grp(2),backgroundColor:css('--gold'),borderColor:surf,borderWidth:2,pointRadius:11,pointHoverRadius:13,labelMe:['PachaMama']}]},
     options:Object.assign(o,{plugins:Object.assign(o.plugins,{pointLabels:{show:true}})})}};
-mk.cRating=()=>{const o=base();o.indexAxis='y';o.interaction={mode:'nearest',intersect:true,axis:'y'};o.scales={x:{min:3.5,max:5,grid:{color:css('--rule')},border:{display:false},ticks:{color:css('--ink-3'),stepSize:.5}},y:{grid:{display:false},ticks:{color:css('--ink-2')}}};
-  o.plugins.tooltip.callbacks.label=i=>i.dataIndex===0?' 4.6 – 5.0':' 4.22';
-  return {type:'bar',data:{labels:ratings.map(r=>r[0]),datasets:[{data:ratings.map(r=>[r[1],r[2]]),backgroundColor:[css('--s3'),css('--s1')],borderRadius:4,borderSkipped:false,barPercentage:.5,minBarLength:6}]},options:o}};
 mk.cYoY=()=>{const o=base();o.indexAxis='y';o.interaction={mode:'index',intersect:false,axis:'y'};o.scales={x:{grid:{color:css('--rule')},border:{display:false},ticks:{color:css('--ink-3')},beginAtZero:true},y:{grid:{display:false},ticks:{color:css('--ink-2'),autoSkip:false,font:{size:11},callback:shortLbl}}};
   o.plugins.tooltip.callbacks.footer=it=>'Last season final: '+yoy[it[0].dataIndex][3];
   return {type:'bar',data:{labels:yoy.map(r=>r[0]),datasets:[hbar(css('--s1'),yoy.map(r=>r[1]),{label:'Now'}),hbar(css('--base'),yoy.map(r=>r[2]),{label:'Same date last season'})]},options:o}};
