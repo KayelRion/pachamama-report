@@ -305,10 +305,10 @@ footer .label{color:var(--band-ink-2)}
     <div class="cv t"><canvas id="cOrganic" aria-label="Organic and direct visits per month"></canvas></div>
     <figcaption>GA4. May–Oct organic: 48,066 (2023) → 9,100 (2026). On 13 Mar 2025 organic halved overnight, the day the large Meta campaign ended and Google's March update began.</figcaption></figure>
   <div class="row">
-    <figure class="c7 rv"><h3>More visits, more profit, month after month<small>Each dot = one month, Nov 2023 → Aug 2026</small></h3>
-      <div class="legend"><span><i style="background:var(--s2)"></i>2023-24</span><span><i style="background:var(--s3)"></i>2024-25</span><span><i style="background:var(--s1)"></i>2025-26</span><span><i class="ln" style="background:var(--ink-3)"></i>Trend</span></div>
-      <div class="cv t"><canvas id="cProfitLink" aria-label="Website visits vs workshop profit by month"></canvas></div>
-      <figcaption>GA4 website sessions per month vs workshop profit to PachaMama that month (income sheets). 29 months, correlation 0.71. High season lifts both, and 2025-26 sits lowest on both.</figcaption></figure>
+    <figure class="c7 rv"><h3>Website visits and workshop profit move together<small>Monthly, Nov 2023 → Aug 2026 · both shown as an index, 2023-24 average = 100</small></h3>
+      <div class="legend"><span><i class="ln" style="background:var(--s2)"></i>Website visits</span><span><i class="ln" style="background:var(--s1)"></i>Workshop profit to PachaMama</span></div>
+      <div class="cv t"><canvas id="cProfitLink" aria-label="Website visits and workshop profit by month"></canvas></div>
+      <figcaption>GA4 sessions and workshop income sheets. Nov–Aug totals, 2023-24 → 2025-26: visits 165K → 91K (−45%), workshop profit $245K → $159K (−35%). Correlation 0.71.</figcaption></figure>
     <figure class="c5 rv"><h3>Fewer people search our name<small>Google clicks, Jul–Oct, 2025 vs 2026</small></h3>
       <div class="legend"><span><i style="background:var(--base)"></i>2025</span><span><i style="background:var(--s2)"></i>2026</span></div>
       <div class="cv t"><canvas id="cBrand" aria-label="Brand and non-brand clicks"></canvas></div>
@@ -547,14 +547,11 @@ mk.cProfit=()=>{const o=base();o.indexAxis='y';o.interaction={mode:'index',inter
   return {type:'bar',data:{labels:profit.l,datasets:[{label:'Workshops',data:profit.w,backgroundColor:css('--s2'),borderColor:surf,borderWidth:{right:2},barPercentage:.6},{label:'Ceremonies & events',data:profit.c,backgroundColor:css('--s1'),borderRadius:{topRight:4,bottomRight:4},borderSkipped:'left',barPercentage:.6}]},options:o}};
 mk.cOrganic=()=>{const o=base();o.plugins.marker={index:orgM.indexOf('202503'),text:'13 Mar 2025'};o.plugins.tooltip.callbacks.label=i=>' '+i.dataset.label+': '+(i.raw==null?'n/a':fmt(i.raw));
   return {type:'line',plugins:[marker],data:{labels:orgM.map(ym),datasets:[{label:'Organic search',data:org,borderColor:css('--s3'),backgroundColor:css('--s3')+'22',fill:true,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,tension:.3},{label:'Direct (engaged)',data:dirE,borderColor:css('--s2'),borderWidth:2,pointRadius:0,pointHoverRadius:5,tension:.3}]},options:o}};
-mk.cProfitLink=()=>{const o=base();o.interaction={mode:'nearest',intersect:true};
-  const xs=profitLink.map(r=>r[1]),ys=profitLink.map(r=>r[2]);const mx=xs.reduce((a,b)=>a+b)/xs.length,my=ys.reduce((a,b)=>a+b)/ys.length;const b=xs.reduce((a,x,i)=>a+(x-mx)*(ys[i]-my),0)/xs.reduce((a,x)=>a+(x-mx)**2,0),a0=my-b*mx;
-  o.scales={x:{type:'linear',min:4000,max:30000,grid:{color:css('--rule')},border:{display:false},title:{display:true,text:'Website visits that month',color:css('--ink-3')},ticks:{color:css('--ink-3'),callback:v=>(v/1000)+'K'}},y:{min:0,grid:{color:css('--rule')},border:{display:false},title:{display:true,text:'Workshop profit to PachaMama',color:css('--ink-3')},ticks:{color:css('--ink-3'),callback:v=>'$'+(v/1000)+'K'}}};
-  o.plugins.tooltip.callbacks={title:()=>'',label:i=>i.datasetIndex===3?' Trend':' '+ym(i.raw.m)+': '+fmt(i.raw.x)+' visits · $'+fmt(i.raw.y)};
-  const surf=css('--surface'),cols=[css('--s2'),css('--s3'),css('--s1')];
-  const ds=[0,1,2].map(k=>({label:['2023-24','2024-25','2025-26'][k],data:profitLink.filter(r=>r[3]===k).map(r=>({x:r[1],y:r[2],m:r[0]})),backgroundColor:cols[k],borderColor:surf,borderWidth:2,pointRadius:7,pointHoverRadius:9}));
-  ds.push({type:'line',label:'Trend',data:[{x:5000,y:Math.max(0,a0+b*5000)},{x:29000,y:a0+b*29000}],borderColor:css('--ink-3'),borderDash:[6,4],borderWidth:2,pointRadius:0,fill:false});
-  return {type:'scatter',data:{datasets:ds},options:o}};
+mk.cProfitLink=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+i.dataset.label+': '+Math.round(i.raw);
+  const av=165168/10,ap=245323/10;
+  return {type:'line',data:{labels:profitLink.map(r=>ym(r[0])),datasets:[
+   {label:'Website visits',data:profitLink.map(r=>r[1]/av*100),borderColor:css('--s2'),borderWidth:3,pointRadius:0,pointHoverRadius:5,tension:.4},
+   {label:'Workshop profit',data:profitLink.map(r=>r[2]/ap*100),borderColor:css('--s1'),borderWidth:3,pointRadius:0,pointHoverRadius:5,tension:.4}]},options:o}};
 mk.cBrand=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+i.dataset.label+': '+fmt(i.raw)+' clicks';o.scales.x.ticks.autoSkip=false;o.scales.x.ticks.callback=function(v){const l=this.getLabelForValue(v);return l.length>14?l.split(' ').reduce((a,w)=>{const L=a[a.length-1];if((L+' '+w).trim().length>14)a.push(w);else a[a.length-1]=(L+' '+w).trim();return a},['']):l};
   return {type:'bar',data:{labels:brand.l,datasets:[bar(css('--base'),brand.a,{label:'2025'}),bar(css('--s2'),brand.b,{label:'2026'})]},options:o}};
 mk.cFx=()=>{const o=base();o.scales.y.beginAtZero=false;o.scales.y.suggestedMin=420;o.scales.y.ticks.callback=v=>'₡'+v;o.plugins.tooltip.callbacks.label=i=>' ₡'+i.raw+' per US$';const s1=css('--s1');
