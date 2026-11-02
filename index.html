@@ -104,7 +104,7 @@ figcaption{font-family:var(--f-ui);font-size:11.5px;color:var(--ink-3);line-heig
 @media (max-width:560px){.cv{height:250px}.cv.t{height:330px}.kpi .v{font-size:32px}figure{padding:14px 12px 10px}}
 .kpi{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:16px;display:grid;gap:4px}
 .kpi .v{font-family:var(--f-display);font-weight:600;font-size:clamp(34px,4.4vw,50px);line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
-.kpi .v.up{color:var(--good)}.kpi .v.down{color:var(--bad)}
+.kpi .v.up{color:var(--good)}.cv .empty{position:absolute;inset:0;display:grid;place-items:center;margin:0;font:13px var(--f-ui);color:var(--ink-3)}.cv{position:relative}.score td,.score th{font-variant-numeric:tabular-nums}.partial.gone{display:none}.kpi .v.down{color:var(--bad)}
 .kpi .d{font-family:var(--f-ui);font-size:12.5px;color:var(--ink-2);line-height:1.35}
 
 .kpis.k3{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -185,9 +185,9 @@ footer .label{color:var(--band-ink-2)}
 
 <header class="hero" id="top">
   <div class="wrap">
-    <div class="label">PachaMama Eco Village · Marketing &amp; Sales · October 2026</div>
-    <h1>Marketing Report <em>October 2026</em></h1>
-    <div class="sub"><span>Prepared by Kayel Rion</span><span>Updated Oct 30, 2026</span></div>
+    <div class="label" id="repLabel">PachaMama Eco Village · Marketing &amp; Sales · October 2026</div>
+    <h1>Marketing Report <em id="repMonth">October 2026</em></h1>
+    <div class="sub"><span>Prepared by Kayel Rion</span><span id="repUpdated">Updated Oct 30, 2026</span></div>
     <div class="map" aria-label="Report map">
       <a class="act-card" href="#act1"><span class="n">I</span><span class="t">Momentum</span></a>
       <a class="act-card" href="#act2"><span class="n">II</span><span class="t">The link</span></a>
@@ -217,40 +217,57 @@ footer .label{color:var(--band-ink-2)}
     <div class="kpi"><span class="v up num" data-count="73" data-pre="+" data-suf="%">+73%</span><span class="d">people with open bookings, Oct 2 → Oct 30</span></div>
     <div class="kpi"><span class="v up num" data-count="10" data-suf="×">10×</span><span class="d">Instagram + Facebook conversations, Jul–Oct 2026 vs 2025 (913 vs 91)</span></div>
   </div>
+  <div class="kpis k3 rv" style="margin-top:12px">
+    <div class="kpi"><span class="v num" id="kApps">52</span><span class="d" id="kAppsD">volunteer applications, October (to Oct 22)</span></div>
+    <div class="kpi"><span class="v num" id="kInq">—</span><span class="d" id="kInqD">inquiries this month · from the first monthly refresh</span></div>
+    <div class="kpi"><span class="v num" id="kBook">—</span><span class="d" id="kBookD">bookings this month · from the first monthly refresh</span></div>
+  </div>
   <div class="row">
     <figure class="c12 rv"><h3>Website users doubled in August, and held<small>Average daily users per week, 2026 vs 2025</small></h3>
       <div class="legend"><span><i class="ln" style="background:var(--s3)"></i>2026</span><span><i class="ln" style="background:var(--base)"></i>2025</span><span><i style="background:var(--s3);opacity:.25"></i>Users first brought by ads (2026)</span></div>
       <div class="cv t"><canvas id="cUsers" aria-label="Daily website users per week, 2026 vs 2025"></canvas></div>
-      <figcaption>GA4 User acquisition, total users by day, averaged per week (Mon–Sun), Jun 1 → Oct 27. Summer 2026 had dropped ~33% below 2025; since Aug 17 it runs ~43% above (301 vs 211 users/day).</figcaption></figure>
+      <figcaption>GA4 User acquisition, total users by day, averaged per week (Mon–Sun), Jun 1 → <span id="usersThrough">Oct 27</span>. Summer 2026 had dropped ~33% below 2025; since Aug 17 it runs ~43% above (301 vs 211 users/day).</figcaption></figure>
   </div>
   <div class="row">
     <figure class="c7 rv"><h3>Instagram views: a new level<small>Views per month, @pachamama_eco_village</small></h3>
       <div class="cv"><canvas id="cIgViews" aria-label="Instagram views per month"></canvas></div>
-      <figcaption>Meta Business Suite. Views metric starts Aug 2025. Oct 2026 = 27 days. Followers 50,536 (+6,242 in 90 days).</figcaption></figure>
+      <figcaption>Meta Business Suite. Views metric starts Aug 2025.<span class="partial"> Oct 2026 = 27 days.</span> Followers <span id="igFollowersCap">50,536</span> (+6,242 in 90 days).</figcaption></figure>
     <figure class="c5 rv"><h3>Bookings build every week<small>People with open bookings</small></h3>
       <div class="legend"><span><i style="background:var(--s2)"></i>Visitors</span><span><i style="background:var(--s3)"></i>Volunteers</span><span><i style="background:var(--base)"></i>Other</span></div>
       <div class="cv"><canvas id="cWeekly" aria-label="Open bookings by week"></canvas></div>
-      <figcaption>Retreat Guru weekly report. Net adds: +7, +15, +20, +22.</figcaption></figure>
+      <figcaption>Retreat Guru weekly report (Oct). Net adds: +7, +15, +20, +22. <span id="weeklyCap"></span></figcaption></figure>
   </div>
   <div class="row">
     <figure class="c4 rv"><h3>Volunteer applications climb<small>Applications per month</small></h3>
       <div class="cv s"><canvas id="cVolApps" aria-label="Volunteer applications per month"></canvas></div>
-      <figcaption>Retreat Guru, program 4253. October to the 22nd.</figcaption></figure>
-    <figure class="c4 rv"><h3>Guanacaste is the growth region<small>Air arrivals via Liberia (LIR), thousands</small></h3>
-      <div class="cv s"><canvas id="cLir" aria-label="Liberia air arrivals"></canvas></div>
-      <figcaption>ICT/CET. 2026: solid = Jan–Sep actual, faded = projected full year at the +11.9% pace (~1.01M). Canada +24%, Europe +7%.</figcaption></figure>
-    <figure class="c4 rv"><h3>Ads that pay back<small>Return and cost, best performers</small></h3>
-      <div class="kpis" style="grid-template-columns:1fr;gap:8px">
-        <div class="kpi"><span class="v num">3.5×</span><span class="d">return on spend, Google "Visit PachaMama" (Oct 5–18)</span></div>
-        <div class="kpi"><span class="v num">$129</span><span class="d">per registered volunteer, each worth ~$1,000/month on site</span></div>
-      </div></figure>
+      <figcaption>Retreat Guru, program 4253.<span class="partial"> October to the 22nd.</span></figcaption></figure>
+    <figure class="c4 rv"><h3>Inquiries<small>Guest inquiries per month</small></h3>
+      <div class="cv s"><canvas id="cInq" aria-label="Inquiries per month"></canvas><p class="empty" id="inqEmpty">Starts with the first monthly refresh.</p></div>
+      <figcaption>Retreat Guru, guest inquiries.</figcaption></figure>
+    <figure class="c4 rv"><h3>Paid ads scorecard<small id="adsMonth">Google + Meta, last month</small></h3>
+      <div class="tw"><table class="score"><thead><tr><th></th><th class="r">Conversions</th><th class="r">Value</th><th class="r">Cost / conv.</th></tr></thead><tbody>
+        <tr><td>Google</td><td class="r" id="gConv">—</td><td class="r" id="gValue">—</td><td class="r" id="gCpc">—</td></tr>
+        <tr><td>Meta</td><td class="r" id="mConv">—</td><td class="r" id="mValue">—</td><td class="r" id="mCpc">—</td></tr>
+      </tbody></table></div>
+      <figcaption>Google Ads and Meta Ads Manager, last published month. Tracking status below.</figcaption></figure>
+  </div>
+  <div class="row">
+    <figure class="c6 rv"><h3>Ad cost per program sign-up<small>USD, by tracker period</small></h3>
+      <div class="cv"><canvas id="cCpa" aria-label="Cost per sign-up"></canvas></div>
+      <figcaption>Google + Meta spend ÷ program sign-ups. Break-even ceiling for a gateway guest ≈ $258–380. <b>Note:</b> Meta can't yet see bookings, so sign-ups that came through Meta ads aren't credited to them. The true cost per sign-up is likely lower than shown.</figcaption></figure>
+    <div class="c6 tw rv"><table><thead><tr><th>Tracking</th><th>Status</th></tr></thead><tbody>
+      <tr><td>Google sees online bookings</td><td><span class="chip good">fixed</span></td></tr>
+      <tr><td>Self-referral credit leak (GA4)</td><td><span class="chip good">fixed Oct 22</span></td></tr>
+      <tr><td>Volunteer application count</td><td><span class="chip warn">verifying</span></td></tr>
+      <tr><td>Meta can see bookings · all Meta-driven bookings so far are uncounted</td><td><span class="chip bad">not yet</span></td></tr>
+    </tbody></table></div>
   </div>
   <div class="row">
     <figure class="c8 rv"><h3>New followers every month, and most stay<small>Instagram follows per month</small></h3>
       <div class="cv"><canvas id="cFollows" aria-label="Instagram follows per month"></canvas></div>
-      <figcaption>Meta Business Suite, Dec 2025 → Oct 2026. Oct 2026 = 27 days.</figcaption></figure>
+      <figcaption>Meta Business Suite, Dec 2025 → <span class="thru">Oct 2026</span>.<span class="partial"> Oct 2026 = 27 days.</span></figcaption></figure>
     <div class="c4 kpis rv" style="grid-template-columns:1fr;align-content:start">
-      <div class="kpi"><span class="v up num" data-count="50536">50,536</span><span class="d">Instagram followers, Oct 27</span></div>
+      <div class="kpi"><span class="v up num" data-count="50536" id="kFollowers">50,536</span><span class="d" id="kFollowersD">Instagram followers, Oct 27</span></div>
       <div class="kpi"><span class="v up num" data-count="6242" data-pre="+">+6,242</span><span class="d">net new followers in 90 days (+14.2%)</span></div>
       <div class="kpi"><span class="v num" data-count="77" data-suf="%">77%</span><span class="d">of new followers stayed (8,103 follows, ~1,860 unfollows). We buy the attention; most of it chooses to stay.</span></div>
     </div>
@@ -258,7 +275,7 @@ footer .label{color:var(--band-ink-2)}
   <div class="row">
     <figure class="c8 rv"><h3>More people start a conversation<small>Instagram + Facebook messaging conversations started per month</small></h3>
       <div class="cv"><canvas id="cMsgs" aria-label="Messaging conversations per month"></canvas></div>
-      <figcaption>Meta Business Suite → Insights → Messaging, Jan 2025 → Oct 27, 2026. Oct 2026 = 27 days.</figcaption></figure>
+      <figcaption>Meta Business Suite → Insights → Messaging, Jan 2025 → <span class="thru">Oct 27, 2026</span>.<span class="partial"> Oct 2026 = 27 days.</span></figcaption></figure>
     <div class="c4 kpis rv" style="grid-template-columns:1fr;align-content:start">
       <div class="kpi"><span class="v up num" data-count="10" data-suf="×">10×</span><span class="d">conversations Jul–Oct 2026 vs Jul–Oct 2025 (913 vs 91)</span></div>
       <div class="kpi"><span class="v num" data-count="78" data-suf="%">78%</span><span class="d">of conversations started organically: 1,357 organic, 391 from ads (since Jan 2025)</span></div>
@@ -303,12 +320,12 @@ footer .label{color:var(--band-ink-2)}
   <figure class="rv"><h3>Organic search lost four of every five visits<small>Website visits per month, May 2023 → Oct 2026</small></h3>
     <div class="legend"><span><i class="ln" style="background:var(--s3)"></i>Organic search</span><span><i class="ln" style="background:var(--s2)"></i>Direct (engaged)</span></div>
     <div class="cv t"><canvas id="cOrganic" aria-label="Organic and direct visits per month"></canvas></div>
-    <figcaption>GA4. May–Oct organic: 48,066 (2023) → 9,100 (2026). On 13 Mar 2025 organic halved overnight, the day the large Meta campaign ended and Google's March update began.</figcaption></figure>
+    <figcaption>GA4, May 2023 → <span class="thru">Oct 2026</span>. May–Oct organic: 48,066 (2023) → 9,100 (2026). On 13 Mar 2025 organic halved overnight, the day the large Meta campaign ended and Google's March update began.</figcaption></figure>
   <div class="row">
-    <figure class="c7 rv"><h3>Website visits and workshop profit move together<small>Monthly, Nov 2023 → Aug 2026 · both shown as an index, 2023-24 average = 100</small></h3>
-      <div class="legend"><span><i class="ln" style="background:var(--s2)"></i>Website visits</span><span><i class="ln" style="background:var(--s1)"></i>Workshop profit to PachaMama</span></div>
-      <div class="cv t"><canvas id="cProfitLink" aria-label="Website visits and workshop profit by month"></canvas></div>
-      <figcaption>GA4 sessions and workshop income sheets. Nov–Aug totals, 2023-24 → 2025-26: visits 165K → 91K (−45%), workshop profit $245K → $159K (−35%). Correlation 0.71.</figcaption></figure>
+    <figure class="c7 rv"><h3>Organic search: the way back<small>Organic search sessions per day, monthly average · dashed = the level before the 13 Mar 2025 cliff</small></h3>
+      <div class="legend"><span><i class="ln" style="background:var(--s3)"></i>Organic sessions / day</span><span><i class="ln" style="background:var(--s1)"></i>Pre-cliff level, ~220 / day</span></div>
+      <div class="cv t"><canvas id="cOrgRecovery" aria-label="Organic search sessions per day vs the pre-cliff level"></canvas></div>
+      <figcaption>GA4, Organic Search channel. The same recovery line as the Command Center's website panel.</figcaption></figure>
     <figure class="c5 rv"><h3>Fewer people search our name<small>Google clicks, Jul–Oct, 2025 vs 2026</small></h3>
       <div class="legend"><span><i style="background:var(--base)"></i>2025</span><span><i style="background:var(--s2)"></i>2026</span></div>
       <div class="cv t"><canvas id="cBrand" aria-label="Brand and non-brand clicks"></canvas></div>
@@ -335,10 +352,19 @@ footer .label{color:var(--band-ink-2)}
       <div class="cv s"><canvas id="cArrivals" aria-label="Arrivals by year"></canvas></div>
       <figcaption>ICT. 2025 +0.8%. 2026 Jan–Sep +4.8% but flat since April; US −13.7% in August. Panama +29%, Colombia +50% in 2025.</figcaption></figure>
     <div class="c6 kpis rv" style="grid-template-columns:repeat(2,minmax(0,1fr));align-content:start">
-      <div class="kpi"><span class="v down num">48</span><span class="d">US consumer sentiment (Oct), near record low</span></div>
-      <div class="kpi"><span class="v down num">+22%</span><span class="d">US airfares year on year (fuel costs)</span></div>
-      <div class="kpi"><span class="v up num">+17%</span><span class="d">trip budgets of travellers who still go (higher income)</span></div>
+      <div class="kpi"><span class="v down num" id="kSent">48</span><span class="d" id="kSentD">US consumer sentiment (Oct), near record low</span></div>
+      <div class="kpi"><span class="v down num" id="kAir">+22%</span><span class="d" id="kAirD">US airfares year on year (fuel costs)</span></div>
       <div class="kpi"><span class="v num">Level 2</span><span class="d">US travel advisory (crime); homicides down in 2026</span></div>
+    </div>
+  </div>
+  <div class="label" style="margin:28px 0 10px">The opening</div>
+  <div class="row">
+    <figure class="c8 rv"><h3>Guanacaste is the growth region<small>Air arrivals via Liberia (LIR), thousands</small></h3>
+      <div class="cv"><canvas id="cLir" aria-label="Liberia air arrivals"></canvas></div>
+      <figcaption>ICT/CET. 2026: solid = Jan–Sep actual, faded = projected full year at the +11.9% pace (~1.01M). Canada +24%, Europe +7%.</figcaption></figure>
+    <div class="c4 kpis rv" style="grid-template-columns:1fr;align-content:start">
+      <div class="kpi"><span class="v up num">+17%</span><span class="d">trip budgets of travellers who still go (higher income)</span></div>
+      <div class="kpi"><span class="v up num">+24%</span><span class="d">Canada arrivals; new direct routes into Liberia (YVR, YOW, JFK, IAD, BNA)</span></div>
     </div>
   </div>
   <figure class="rv"><h3>The field filled up after 2008<small>Costa Rica eco-villages and retreat centres by founding year</small></h3>
@@ -392,20 +418,9 @@ footer .label{color:var(--band-ink-2)}
       <figcaption>Retreat Guru YoY table, Oct 29. Hover for last season's final.</figcaption></figure>
   </div>
   <div class="row">
-    <figure class="c6 rv"><h3>Ad cost per program sign-up<small>USD, by tracker period</small></h3>
-      <div class="cv"><canvas id="cCpa" aria-label="Cost per sign-up"></canvas></div>
-      <figcaption>Google + Meta spend ÷ program sign-ups. Break-even ceiling for a gateway guest ≈ $258–380. <b>Note:</b> Meta can't yet see bookings, so sign-ups that came through Meta ads aren't credited to them. The true cost per sign-up is likely lower than shown.</figcaption></figure>
     <figure class="c6 rv"><h3>Volunteer funnel<small>Aug 1 → Oct 22</small></h3>
       <div class="funnel" id="funnel"></div>
       <figcaption>GA4 + Retreat Guru. Half of submit attempts fail: the form is the leak.</figcaption></figure>
-  </div>
-  <div class="row">
-    <div class="c6 tw rv"><table><thead><tr><th>Tracking</th><th>Status</th></tr></thead><tbody>
-      <tr><td>Google sees online bookings</td><td><span class="chip good">fixed</span></td></tr>
-      <tr><td>Self-referral credit leak (GA4)</td><td><span class="chip good">fixed Oct 22</span></td></tr>
-      <tr><td>Volunteer application count</td><td><span class="chip warn">verifying</span></td></tr>
-      <tr><td>Meta can see bookings · all Meta-driven bookings so far are uncounted</td><td><span class="chip bad">not yet</span></td></tr>
-    </tbody></table></div>
     <div class="c6 tw rv"><table><thead><tr><th>Monthly budget</th><th class="r">USD</th></tr></thead><tbody>
       <tr><td>Google · Visit, Volunteer, Body Cleanse</td><td class="r">~2,430</td></tr>
       <tr><td>Meta · from Nov 10</td><td class="r">~2,570</td></tr>
@@ -469,7 +484,9 @@ const igViews={l:['202508','202509','202510','202511','202512','202601','202602'
 const weekly={l:['Oct 2','Oct 9','Oct 16','Oct 23','Oct 30'],p:[88,95,110,130,152],vis:[35,43,54,67,81],vol:[30,30,34,36,44]};
 const follows={l:['202512','202601','202602','202603','202604','202605','202606','202607','202608','202609','202610'],v:[1388,866,696,770,845,663,560,1401,3332,2546,2171]};
 const msgs={l:['202501','202502','202503','202504','202505','202506','202507','202508','202509','202510','202511','202512','202601','202602','202603','202604','202605','202606','202607','202608','202609','202610'],v:[58,97,64,30,46,24,3,30,18,40,111,63,44,33,50,42,28,16,186,279,170,278]};
-const volApps={l:['Aug','Sep','Oct*'],v:[32,40,52]};
+const volApps={l:['202608','202609','202610'],v:[32,40,52]};
+const inq={l:[],v:[]};
+let partialOct=true;
 const lir={l:['2019','2022','2024','2025','2026'],v:[599,662,881,905,770],proj:1013};
 const seasons={l:['2021-22','2022-23','2023-24','2024-25','2025-26'],v:[957,802,932,712,564]};
 const seasonIdx={l:['2023-24','2024-25','2025-26'],users:[100,89,61],guests:[100,76,61]};
@@ -527,13 +544,18 @@ mk.cUsers=()=>{const o=base();o.plugins.marker={index:11,text:'Campaigns + posti
    {label:'2026',data:wk26.map(w=>w[1]),borderColor:css('--s3'),borderWidth:2.5,pointRadius:0,pointHoverRadius:5,tension:.3},
    {label:'2025',data:wk25,borderColor:css('--base'),borderWidth:2,borderDash:[5,4],pointRadius:0,pointHoverRadius:4,tension:.3},
    {label:'First brought by ads',data:wk26.map(w=>w[2]),borderColor:'transparent',backgroundColor:css('--s3')+'40',fill:'origin',pointRadius:0,tension:.3}]},options:o}};
-mk.cIgViews=()=>{const o=base();o.scales.y.ticks.callback=v=>v>=1e6?(v/1e6)+'M':(v/1e3)+'K';o.plugins.tooltip.callbacks.label=i=>' '+fmt(i.raw)+' views'+(i.dataIndex===14?' (27 days)':'');
+mk.cIgViews=()=>{const o=base();o.scales.y.ticks.callback=v=>v>=1e6?(v/1e6)+'M':(v/1e3)+'K';o.plugins.tooltip.callbacks.label=i=>' '+fmt(i.raw)+' views'+(partialOct&&igViews.l[i.dataIndex]==='202610'?' (27 days)':'');
   const s3=css('--s3');return {type:'bar',data:{labels:igViews.l.map(ym),datasets:[bar(igViews.v.map((v,i)=>i>=12?s3:s3+'80'),igViews.v)]},options:o}};
 mk.cWeekly=()=>{const o=base();o.scales.x.stacked=true;o.scales.y.stacked=true;o.plugins.tooltip.callbacks.footer=it=>'Total: '+weekly.p[it[0].dataIndex];const surf=css('--surface');
   return {type:'bar',data:{labels:weekly.l,datasets:[bar(css('--s2'),weekly.vis,{label:'Visitors',borderRadius:0,borderColor:surf,borderWidth:{top:2}}),bar(css('--s3'),weekly.vol,{label:'Volunteers',borderRadius:0,borderColor:surf,borderWidth:{top:2}}),bar(css('--base'),weekly.p.map((p,i)=>p-weekly.vis[i]-weekly.vol[i]),{label:'Other'})]},options:o}};
-mk.cFollows=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+fmt(i.raw)+' new follows'+(i.dataIndex===10?' (27 days)':'');const s3=css('--s3');return {type:'bar',data:{labels:follows.l.map(ym),datasets:[bar(follows.v.map((v,i)=>i>=7?s3:s3+'80'),follows.v)]},options:o}};
-mk.cMsgs=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+i.raw+' conversations'+(i.dataIndex===21?' (27 days)':'');const s2=css('--s2');return {type:'bar',data:{labels:msgs.l.map(ym),datasets:[bar(msgs.v.map((v,i)=>i>=18?s2:s2+'80'),msgs.v,{maxBarThickness:30})]},options:o}};
-mk.cVolApps=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+i.raw+' applications'+(i.dataIndex===2?' (to Oct 22)':'');return {type:'bar',data:{labels:volApps.l,datasets:[bar(css('--s3'),volApps.v)]},options:o}};
+mk.cFollows=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+fmt(i.raw)+' new follows'+(partialOct&&follows.l[i.dataIndex]==='202610'?' (27 days)':'');const s3=css('--s3');return {type:'bar',data:{labels:follows.l.map(ym),datasets:[bar(follows.v.map((v,i)=>i>=7?s3:s3+'80'),follows.v)]},options:o}};
+mk.cMsgs=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+i.raw+' conversations'+(partialOct&&msgs.l[i.dataIndex]==='202610'?' (27 days)':'');const s2=css('--s2');return {type:'bar',data:{labels:msgs.l.map(ym),datasets:[bar(msgs.v.map((v,i)=>i>=18?s2:s2+'80'),msgs.v,{maxBarThickness:30})]},options:o}};
+mk.cVolApps=()=>{const o=base();o.plugins.tooltip.callbacks.label=i=>' '+i.raw+' applications'+(partialOct&&volApps.l[i.dataIndex]==='202610'?' (to Oct 22)':'');return {type:'bar',data:{labels:volApps.l.map(ym),datasets:[bar(css('--s3'),volApps.v)]},options:o}};
+mk.cInq=()=>{if(!inq.v.length)return null;const o=base();o.plugins.tooltip.callbacks.label=i=>' '+i.raw+' inquiries';return {type:'bar',data:{labels:inq.l.map(ym),datasets:[bar(css('--s2'),inq.v)]},options:o}};
+mk.cOrgRecovery=()=>{const o=base();const dim=m=>new Date(Date.UTC(+m.slice(0,4),+m.slice(4),0)).getUTCDate();
+  const per=orgM.map((m,i)=>org[i]==null?null:Math.round(org[i]/dim(m)));o.plugins.tooltip.callbacks.label=i=>' '+i.dataset.label+': '+(i.raw==null?'n/a':fmt(i.raw))+' / day';
+  return {type:'line',data:{labels:orgM.map(ym),datasets:[{label:'Organic sessions',data:per,borderColor:css('--s3'),backgroundColor:css('--s3')+'22',fill:true,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,tension:.3},
+   {label:'Pre-cliff level',data:orgM.map(()=>220),borderColor:css('--s1'),borderWidth:2,borderDash:[6,5],pointRadius:0,pointHoverRadius:0}]},options:o}};
 mk.cLir=()=>{const o=base();o.scales.x.stacked=true;o.scales.y.stacked=true;o.interaction={mode:'nearest',intersect:true};o.plugins.tooltip.callbacks.label=i=>i.datasetIndex===0?' '+i.raw+'K air arrivals'+(i.dataIndex===4?' (Jan–Sep actual)':''):' ~'+lir.proj+'K projected full year (+11.9% pace)';const s3=css('--s3');return {type:'bar',data:{labels:lir.l,datasets:[bar(s3,lir.v,{borderRadius:lir.v.map((v,i)=>i===4?0:{topLeft:4,topRight:4})}),bar(s3+'40',lir.v.map((v,i)=>i===4?lir.proj-v:null),{borderColor:s3,borderWidth:1.5,borderDash:[4,3]})]},options:o}};
 mk.cLink=()=>{const o=base();o.plugins.marker={index:11,text:'Aug 17'};o.scales.y.ticks.callback=v=>v;o.plugins.tooltip.callbacks.label=i=>' '+i.dataset.label+': '+(i.raw==null?'n/a':Math.round(i.raw));
   return {type:'line',plugins:[marker],data:{labels:wkLbl,datasets:[
@@ -575,14 +597,14 @@ mk.cYoY=()=>{const o=base();o.indexAxis='y';o.interaction={mode:'index',intersec
   return {type:'bar',data:{labels:yoy.map(r=>r[0]),datasets:[hbar(css('--s1'),yoy.map(r=>r[1]),{label:'Now'}),hbar(css('--base'),yoy.map(r=>r[2]),{label:'Same date last season'})]},options:o}};
 mk.cCpa=()=>{const o=base();o.scales.y.ticks.callback=v=>'$'+v;o.plugins.tooltip.callbacks.label=i=>' $'+i.raw+' per sign-up';return {type:'bar',data:{labels:cpa.l,datasets:[bar(css('--s1'),cpa.v)]},options:o}};
 
-function build(id){const el=document.getElementById(id);if(!el||!mk[id])return;if(charts[id])charts[id].destroy();charts[id]=new Chart(el,mk[id]())}
+function build(id){const el=document.getElementById(id);if(!el||!mk[id])return;const cfg=mk[id]();if(charts[id])charts[id].destroy();if(cfg)charts[id]=new Chart(el,cfg)}
 function buildAll(){Object.keys(mk).forEach(build)}
 if(window.Chart){buildAll()}
 
 /* replay animation when a chart, KPI or bar first scrolls into view (resting state is already drawn) */
 const seen=new WeakSet();
-function countUp(el){const to=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0),pre=el.dataset.pre||'',suf=el.dataset.suf||'';const t0=performance.now(),d=1100;
-  const step=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent=pre+(to*e).toFixed(dec)+suf;if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
+function countUp(el){const t0=performance.now(),d=1100;  // reads data-* every frame, so live numbers that land mid-animation win
+  const step=t=>{const to=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0),pre=el.dataset.pre||'',suf=el.dataset.suf||'';const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent=pre+(k<1?(to*e).toFixed(dec):(dec?to.toFixed(dec):Math.round(to).toLocaleString('en-US')))+suf;if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
 if('IntersectionObserver' in window && !reduce){
   document.querySelectorAll('.rv').forEach(el=>{if(el.getBoundingClientRect().top>window.innerHeight)el.classList.add('pre')});
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting||seen.has(e.target))return;seen.add(e.target);const el=e.target;el.classList.remove('pre');
@@ -592,6 +614,61 @@ if('IntersectionObserver' in window && !reduce){
   }),{threshold:.25});
   document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 }
+
+/* ---------------- live data: the Command Center's published months (Rion 11-02) ----------------
+   Everything above is the October 2026 history. Each month Rion publishes in the cockpit gets added here;
+   if the feed can't be reached, the page shows the history as it is. Totals only. */
+const FEED='https://calm-rugelach-b0c748.netlify.app/api/report/public';
+const MF=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const k6=y=>y.replace('-','');const mLong=y=>MF[+y.slice(5)-1]+' '+y.slice(0,4);const mShort=y=>M[+y.slice(5)-1];
+const dimY=y=>new Date(Date.UTC(+y.slice(0,4),+y.slice(5),0)).getUTCDate();
+const setT=(id,t)=>{const e=document.getElementById(id);if(e&&t!=null)e.textContent=t};
+const setCount=(id,val,pre,suf,dec)=>{const e=document.getElementById(id);if(!e||val==null)return;e.dataset.count=val;e.dataset.pre=pre||'';e.dataset.suf=suf||'';e.dataset.dec=dec||0;e.textContent=(pre||'')+(dec?(+val).toFixed(dec):fmt(val))+(suf||'')};
+function upsert(series,key,val){if(val==null)return;const i=series.l.indexOf(key);if(i>=0)series.v[i]=val;else{series.l.push(key);series.v.push(val);const o=series.l.map((l,j)=>[l,series.v[j]]).sort((a,b)=>a[0]<b[0]?-1:1);series.l.splice(0,series.l.length,...o.map(x=>x[0]));series.v.splice(0,series.v.length,...o.map(x=>x[1]))}}
+const sumBack=(series,n,shift)=>{const L=series.l.length;let s=0;for(let i=L-n;i<L;i++){const key=series.l[i];if(!key)return null;const y=+key.slice(0,4)-(shift?1:0);const k=y+key.slice(4);const j=series.l.indexOf(k);if(j<0||series.v[j]==null)return null;s+=series.v[j]}return s};
+function applyFeed(f){
+  const yms=Object.keys(f.months||{}).sort();if(!yms.length)return;
+  const L=f.latest,D=f.months[L];
+  yms.forEach(y=>{const m=f.months[y],k=k6(y);
+    if(m.igViews!=null)upsert(igViews,k,m.igViews);if(m.igFollows!=null)upsert(follows,k,m.igFollows);if(m.conversations!=null)upsert(msgs,k,m.conversations);
+    if(m.volunteerApps!=null)upsert(volApps,k,m.volunteerApps);if(m.inquiries!=null)upsert(inq,k,m.inquiries);
+    if(m.organicPerDay!=null&&y>='2023-05'){const i=orgM.indexOf(k),tot=m.organicPerDay*dimY(y);if(i>=0)org[i]=tot;else{orgM.push(k);org.push(tot);dirE.push(null)}}
+    (m.usersWeeks||[]).forEach(([wd,u,u0])=>{const i=wk26.findIndex(w=>w[0]===wd);if(i>=0){wk26[i][1]=u;if(u0!=null)wk25[i]=u0}else if(wd>wk26[wk26.length-1][0]){wk26.push([wd,u,null]);wk25.push(u0);const d=new Date(wd+'T12:00:00Z');wkLbl.push(M[d.getUTCMonth()]+' '+d.getUTCDate());regWk.push(m.programRegs!=null?m.programRegs/dimY(y):null)}});
+    if(y>'2026-10'&&m.openBookings!=null){const lab=mShort(y)+' '+dimY(y);if(!weekly.l.includes(lab)){weekly.l.push(lab);weekly.p.push(m.openBookings);const v=m.volunteersBooked||0;weekly.vol.push(v);weekly.vis.push(0)}}
+  });
+  if(L<'2026-10'){if(window.Chart)buildAll();return}  // seeded history only: this page already is the October edition
+  if(f.months['2026-10']||yms.some(y=>y>'2026-10')){partialOct=false;document.querySelectorAll('.partial').forEach(e=>e.classList.add('gone'))}
+  document.querySelectorAll('.thru').forEach(e=>e.textContent=mLong(L).replace(/^(\w{3})\w*/,'$1'));
+  setT('repMonth',mLong(L));setT('repLabel','PachaMama Eco Village · Marketing & Sales · '+mLong(L));
+  if(f.publishedAt)setT('repUpdated','Updated '+new Date(f.publishedAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}));
+  const wl=wk26[wk26.length-1][0];const wd=new Date(wl+'T12:00:00Z');wd.setUTCDate(wd.getUTCDate()+6);setT('usersThrough',M[wd.getUTCMonth()]+' '+wd.getUTCDate());
+  if(weekly.l.length>5)setT('weeklyCap','From Nov: month-end totals from the Command Center (volunteers vs everyone else).');
+  // snapshot tiles
+  if(D.volunteerApps!=null){setCount('kApps',D.volunteerApps);setT('kAppsD','volunteer applications, '+mLong(L))}
+  if(D.inquiries!=null){setCount('kInq',D.inquiries);setT('kInqD','inquiries, '+mLong(L))}
+  if(D.bookings!=null){setCount('kBook',D.bookings);setT('kBookD','bookings made in '+mLong(L)+' (programs, stays, volunteers)')}
+  if(D.igFollowers!=null){setCount('kFollowers',D.igFollowers);setT('kFollowersD','Instagram followers, end of '+mLong(L));setT('igFollowersCap',fmt(D.igFollowers))}
+  if(inq.v.length){const e=document.getElementById('inqEmpty');if(e)e.remove()}
+  const tiles=(document.querySelector('#act1 + .body .kpis')||document.body).querySelectorAll('.kpi');
+  const tile=(n,val,pre,suf,dec,desc)=>{const t=tiles[n];if(!t)return;const v=t.querySelector('.v'),d=t.querySelector('.d');v.dataset.count=val;v.dataset.pre=pre||'';v.dataset.suf=suf||'';v.dataset.dec=dec||0;v.textContent=(pre||'')+(dec?(+val).toFixed(dec):fmt(val))+(suf||'');d.textContent=desc};
+  const ig3=sumBack(igViews,3,false),ig3p=sumBack(igViews,3,true);
+  if(ig3&&ig3p)tile(0,ig3/ig3p,'','×',1,'Instagram views, last 3 months vs the same months a year earlier');
+  if(D.usersPerDay!=null)tile(1,D.usersPerDay,'~','',0,'website users a day in '+mLong(L)+', from ~150 before mid-Aug 2026');
+  const prev=yms.filter(y=>y<L&&f.months[y].openBookings!=null).pop();
+  if(prev&&D.openBookings!=null&&f.months[prev].openBookings){const ch=Math.round((D.openBookings/f.months[prev].openBookings-1)*100);tile(2,Math.abs(ch),ch>=0?'+':'−','%',0,'open bookings, end of '+mLong(prev)+' → end of '+mLong(L))}
+  const c4=sumBack(msgs,4,false),c4p=sumBack(msgs,4,true);
+  if(c4&&c4p)tile(3,c4/c4p,'','×',0,'Instagram + Facebook conversations, last 4 months vs a year earlier ('+fmt(c4)+' vs '+fmt(c4p)+')');
+  // paid ads scorecard
+  const money=n=>n==null?'—':'$'+fmt(n);
+  setT('adsMonth','Google + Meta, '+mLong(L));
+  if(D.gConv!=null){setT('gConv',(+D.gConv).toLocaleString('en-US'));setT('gValue',money(D.gValue));setT('gCpc',D.gConv?money(D.gSpend/D.gConv):'—')}
+  if(D.mConv!=null){setT('mConv',(+D.mConv).toLocaleString('en-US'));setT('mValue',money(D.mValue));setT('mCpc',D.mConv?money(D.mSpend/D.mConv):'—')}
+  // headwinds refreshed monthly
+  if(D.usSentiment!=null){setT('kSent',String(D.usSentiment));setT('kSentD','US consumer sentiment ('+mShort(L)+'), University of Michigan')}
+  if(D.usAirfares!=null){setT('kAir',(D.usAirfares>0?'+':'')+D.usAirfares+'%');setT('kAirD','US airfares year on year ('+mShort(L)+')')}
+  if(window.Chart)buildAll();
+}
+fetch(FEED,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(f=>{if(f)applyFeed(f)}).catch(()=>{});
 const rd=()=>{clearTimeout(rd.t);rd.t=setTimeout(()=>window.Chart&&buildAll(),60)};
 const mq=window.matchMedia('(prefers-color-scheme: dark)');mq.addEventListener&&mq.addEventListener('change',rd);
 new MutationObserver(rd).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
