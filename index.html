@@ -93,7 +93,7 @@ figure h3 small{display:block;font-family:var(--f-ui);font-size:12px;font-weight
 .cv{position:relative;height:290px;width:100%;min-width:0}
 .cv.t{height:360px}.cv.s{height:210px}.cv.xs{height:170px}
 .odk{display:flex;gap:18px;flex-wrap:wrap;margin:6px 0 4px}.odk>div{display:flex;flex-direction:column}.odk b{font-family:var(--f-display);font-size:40px;line-height:1;font-weight:600}.odk span{font-family:var(--f-ui);font-size:12px;color:var(--ink-3)}
-#odChart svg text{font-family:var(--f-ui);font-size:11px;fill:var(--ink-3)}.odwait{font-family:var(--f-ui);font-size:12.5px;color:var(--ink-3)}
+.odc svg text,#odChart svg text{font-family:var(--f-ui);font-size:11px;fill:var(--ink-3)}.odwait{font-family:var(--f-ui);font-size:12.5px;color:var(--ink-3)}
 figcaption{font-family:var(--f-ui);font-size:11.5px;color:var(--ink-3);line-height:1.45}
 .legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--f-ui);font-size:12.5px;color:var(--ink-2)}
 .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -225,10 +225,11 @@ footer .label{color:var(--band-ink-2)}
     <div class="kpi"><span class="v num" id="kBook">—</span><span class="d" id="kBookD">bookings this month · from the first monthly refresh</span></div>
   </div>
   <div class="row">
-    <figure class="c12 rv"><h3>Website users doubled in August, and held<small>Average daily users per week, 2026 vs 2025</small></h3>
-      <div class="legend"><span><i class="ln" style="background:var(--s3)"></i>2026</span><span><i class="ln" style="background:var(--base)"></i>2025</span><span><i style="background:var(--s3);opacity:.25"></i>Users first brought by ads (2026)</span></div>
-      <div class="cv t"><canvas id="cUsers" aria-label="Daily website users per week, 2026 vs 2025"></canvas></div>
-      <figcaption>GA4 User acquisition, total users by day, averaged per week (Mon–Sun), Jun 1 → <span id="usersThrough">Oct 27</span>. Summer 2026 had dropped ~33% below 2025; since Aug 17 it runs ~43% above (301 vs 211 users/day).</figcaption></figure>
+    <figure class="c12 rv" id="usersDaily"><h3>Website users, every day since Aug 1<small id="udSrc">GA4 · total users by day · live from the Command Center</small></h3>
+      <div class="odk"><div><b class="num" id="udLast">–</b><span id="udLastL">yesterday</span></div><div><b class="num" id="ud7">–</b><span>7-day average</span></div><div><b class="num" id="udVs">–</b><span>vs. summer baseline (~150/day)</span></div></div>
+      <div id="udChart" class="odc"><p class="odwait">The users line loads from the Command Center.</p></div>
+      <div class="legend"><span><i style="background:var(--s3)"></i>Daily users</span><span><i style="background:var(--base)"></i>7-day average</span></div>
+      <figcaption>GA4, total users by day since Aug 1 · grey dashes = 7-day average · the dashed marker is Aug 17, when campaigns and the posting rhythm switched on. The same panel as the Command Center's website section.</figcaption></figure>
   </div>
   <div class="row">
     <figure class="c7 rv"><h3>Instagram views: a new level<small>Views per month, @pachamama_eco_village</small></h3>
@@ -326,7 +327,7 @@ footer .label{color:var(--band-ink-2)}
   <div class="row">
     <figure class="c7 rv" id="orgDaily"><h3>Organic search, every day<small id="odSrc">GA4 · live from the Command Center</small></h3>
       <div class="odk"><div><b class="num" id="odLast">–</b><span id="odLastL">yesterday</span></div><div><b class="num" id="od7">–</b><span>7-day avg · <span id="odVs"></span></span></div><div><b class="num" id="odBrand">–</b><span id="odBrandL">brand-name clicks · 28d</span></div></div>
-      <div id="odChart"><p class="odwait">The organic line loads from the Command Center.</p></div>
+      <div id="odChart" class="odc"><p class="odwait">The organic line loads from the Command Center.</p></div>
       <figcaption>Google organic sessions per day (GA4) · dashed line = before the March 2025 drop (~220/day) · grey dashes = 7-day average. The same panel as the Command Center's website section.</figcaption></figure>
     <figure class="c5 rv"><h3>Fewer people search our name<small>Google clicks, Jul–Oct, 2025 vs 2026</small></h3>
       <div class="legend"><span><i style="background:var(--base)"></i>2025</span><span><i style="background:var(--s2)"></i>2026</span></div>
@@ -541,11 +542,6 @@ const hbar=(c,d,x)=>Object.assign({data:d,backgroundColor:c,borderRadius:{topRig
 const marker={id:'marker',afterDatasetsDraw(c,a,o){if(!o||o.index==null)return;const x=c.scales.x.getPixelForValue(o.index);const {top,bottom,right}=c.chartArea;const ctx=c.ctx;ctx.save();ctx.strokeStyle=css('--terra');ctx.setLineDash([4,4]);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,bottom);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=css('--terra');ctx.font='600 12px Inter, system-ui, sans-serif';const w=ctx.measureText(o.text).width;ctx.fillText(o.text,Math.min(x+6,right-w-4),top+14);ctx.restore()}};
 const pointLabels={id:'pointLabels',afterDatasetsDraw(c,a,o){if(!o||!o.show)return;const ctx=c.ctx;ctx.save();ctx.font='600 12px Inter, system-ui, sans-serif';ctx.fillStyle=css('--ink');c.data.datasets.forEach((ds,di)=>{if(!ds.labelMe)return;c.getDatasetMeta(di).data.forEach((pt,i)=>{const t=ds.labelMe[i];if(!t)return;ctx.fillText(t,pt.x+12,pt.y+4)})});ctx.restore()}};
 const mk={};
-mk.cUsers=()=>{const o=base();o.plugins.marker={index:11,text:'Campaigns + posting rhythm on'};o.plugins.tooltip.callbacks.label=i=>' '+i.dataset.label+': '+fmt(i.raw)+' users/day';
-  return {type:'line',plugins:[marker],data:{labels:wkLbl,datasets:[
-   {label:'2026',data:wk26.map(w=>w[1]),borderColor:css('--s3'),borderWidth:2.5,pointRadius:0,pointHoverRadius:5,tension:.3},
-   {label:'2025',data:wk25,borderColor:css('--base'),borderWidth:2,borderDash:[5,4],pointRadius:0,pointHoverRadius:4,tension:.3},
-   {label:'First brought by ads',data:wk26.map(w=>w[2]),borderColor:'transparent',backgroundColor:css('--s3')+'40',fill:'origin',pointRadius:0,tension:.3}]},options:o}};
 mk.cIgViews=()=>{const o=base();o.scales.y.ticks.callback=v=>v>=1e6?(v/1e6)+'M':(v/1e3)+'K';o.plugins.tooltip.callbacks.label=i=>' '+fmt(i.raw)+' views'+(partialOct&&igViews.l[i.dataIndex]==='202610'?' (27 days)':'');
   const s3=css('--s3');return {type:'bar',data:{labels:igViews.l.map(ym),datasets:[bar(igViews.v.map((v,i)=>i>=12?s3:s3+'80'),igViews.v)]},options:o}};
 mk.cWeekly=()=>{const o=base();o.scales.x.stacked=true;o.scales.y.stacked=true;o.plugins.tooltip.callbacks.footer=it=>'Total: '+weekly.p[it[0].dataIndex];const surf=css('--surface');
@@ -666,18 +662,27 @@ function applyFeed(f){
   if(D.usAirfares!=null){setT('kAir',(D.usAirfares>0?'+':'')+D.usAirfares+'%');setT('kAirD','US airfares year on year ('+mShort(L)+')')}
   if(window.Chart)buildAll();
 }
-/* "Organic search, every day": the cockpit's panel, same data (feed.organicLive) and same chart maths (Rion 11-02) */
+/* the cockpit's two website panels, same data (feed.gaLive) and same chart maths (Rion 11-02) */
 const odLabel=d=>new Date(d+'T12:00').toLocaleDateString('en-US',{month:'short',day:'numeric'});
-function odLine(days,vals,{H=260,W=460,avg,ref}={}){
+function odLine(days,vals,{H=260,W=460,avg,ref,marker,label='Organic search sessions per day'}={}){
   const L=34,B=22,n=vals.length,max=Math.max(1,...vals,ref?ref.v:0)*1.1;
   const x=i=>L+(i/(n-1))*(W-L-8),y=v=>(H-B)-(v/max)*(H-B-6);
   const step=Math.pow(10,Math.floor(Math.log10(max)))/(max/Math.pow(10,Math.floor(Math.log10(max)))>5?0.5:1)/2;
   let g='';for(let v=0;v<=max;v+=step)g+=`<line x1="${L}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule)"/><text x="${L-6}" y="${y(v)+3.5}" text-anchor="end">${Math.round(v)}</text>`;
   days.forEach((d,i)=>{if(d.endsWith('-01')||i===n-1)g+=`<text x="${x(i)}" y="${H-5}" text-anchor="${i===n-1?'end':'middle'}">${odLabel(d)}</text>`});
+  if(marker){const i=days.indexOf(marker.date);if(i>=0)g+=`<line x1="${x(i)}" x2="${x(i)}" y1="4" y2="${H-B}" stroke="var(--s1)" stroke-dasharray="4 4"/><text x="${x(i)+6}" y="14" style="fill:var(--s1)">${marker.text}</text>`}
   const pts=vals.map((v,i)=>`${x(i)},${y(v)}`).join(' '),area=`${x(0)},${H-B} ${pts} ${x(n-1)},${H-B}`;
   let a='';if(avg){const ap=avg.map((v,i)=>v==null?null:`${x(i)},${y(v)}`).filter(Boolean).join(' ');a=`<polyline points="${ap}" fill="none" stroke="var(--base)" stroke-width="2" stroke-dasharray="5 4"/>`}
   if(ref)g+=`<line x1="${L}" x2="${W}" y1="${y(ref.v)}" y2="${y(ref.v)}" stroke="var(--s1)" stroke-width="1.5" stroke-dasharray="6 5"/><text x="${W-4}" y="${y(ref.v)-6}" text-anchor="end" style="fill:var(--s1)">${ref.text}</text>`;
-  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Organic search sessions per day">${g}<polygon points="${area}" fill="color-mix(in srgb,var(--s3) 14%,transparent)"/><polyline points="${pts}" fill="none" stroke="var(--s3)" stroke-width="2.2"/>${a}<circle cx="${x(n-1)}" cy="${y(vals[n-1])}" r="4" fill="var(--s3)"/></svg>`;
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${label}">${g}<polygon points="${area}" fill="color-mix(in srgb,var(--s3) 14%,transparent)"/><polyline points="${pts}" fill="none" stroke="var(--s3)" stroke-width="2.2"/>${a}<circle cx="${x(n-1)}" cy="${y(vals[n-1])}" r="4" fill="var(--s3)"/></svg>`;
+}
+function applyUsers(o){
+  if(!o||!o.users||!o.users.length)return;
+  const u=o.users,n=u.length,avg=Math.round(u.slice(-7).reduce((a,b)=>a+b,0)/7),vs=Math.round((avg/150-1)*100);
+  setT('udLast',String(u[n-1]));setT('udLastL',odLabel(o.days[n-1]));setT('ud7',String(avg));setT('udVs',(vs>=0?'+':'')+vs+'%');
+  const roll=u.map((_,i)=>i<6?null:Math.round(u.slice(i-6,i+1).reduce((a,b)=>a+b,0)/7));
+  document.getElementById('udChart').innerHTML=odLine(o.days,u,{H:240,W:1000,avg:roll,marker:{date:'2026-08-17',text:'Campaigns + posting rhythm on'},label:'Daily website users'});
+  if(o.updatedAt){const m=(Date.now()-new Date(o.updatedAt))/6e4;const e=document.getElementById('udSrc');e.innerHTML='GA4 · total users by day'+(o.active!=null?' · <b style="color:var(--s3)">'+o.active+' on the site now</b>':'')+' · updated '+(m<60?Math.max(1,Math.round(m))+' min ago':m<2880?Math.round(m/60)+' h ago':Math.round(m/1440)+' days ago')}
 }
 function applyOrganic(o){
   if(!o||!o.organic||!o.organic.length)return;
@@ -688,7 +693,7 @@ function applyOrganic(o){
   document.getElementById('odChart').innerHTML=odLine(o.days,org,{avg:roll,ref:{v:220,text:'before Mar 2025 · ~220/day'}});
   if(o.updatedAt){const m=(Date.now()-new Date(o.updatedAt))/6e4;setT('odSrc','GA4 · updated '+(m<60?Math.max(1,Math.round(m))+' min ago':m<2880?Math.round(m/60)+' h ago':Math.round(m/1440)+' days ago')+(o.through?' · brand clicks through '+odLabel(o.through):''))}
 }
-fetch(FEED,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(f=>{if(f){applyFeed(f);applyOrganic(f.organicLive)}}).catch(()=>{});
+fetch(FEED,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(f=>{if(f){applyFeed(f);applyUsers(f.gaLive);applyOrganic(f.gaLive)}}).catch(()=>{});
 const rd=()=>{clearTimeout(rd.t);rd.t=setTimeout(()=>window.Chart&&buildAll(),60)};
 const mq=window.matchMedia('(prefers-color-scheme: dark)');mq.addEventListener&&mq.addEventListener('change',rd);
 new MutationObserver(rd).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
