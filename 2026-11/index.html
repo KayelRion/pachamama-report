@@ -188,6 +188,18 @@ footer .label{color:var(--band-ink-2)}
 .partbar b{color:var(--gold);font-size:15px}.partbar.gone{display:none}
 .map.m4{grid-template-columns:repeat(4,minmax(0,1fr))}@media (max-width:980px){.map.m4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .kpis.k2{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi .v.dn{color:var(--bad)}
+/* Act IV: room to breathe (Rion 11-16) */
+.body.airy{padding-block:48px 72px}.body.airy .wrap{gap:36px}.body.airy .row{gap:28px}
+.body.airy figure{padding:26px 26px 18px;gap:16px}.body.airy figure h3{font-size:24px}
+.cv.xl{height:520px}@media (max-width:560px){.cv.xl{height:560px}.body.airy figure{padding:18px 14px 12px}}
+.body.airy .funnel{gap:14px}.body.airy .frow{font-size:14px}.body.airy .prop{height:52px}
+.next{display:grid;gap:18px}.next h3{font-size:28px;color:var(--ink)}.next h3 small{display:block;font-family:var(--f-ui);font-size:13px;font-weight:400;color:var(--ink-3);margin-top:6px}
+.nextgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}@media (max-width:760px){.nextgrid{grid-template-columns:1fr}}
+.nx{display:grid;grid-template-columns:40px 1fr;gap:14px;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:18px 20px}
+.nx .i{font-family:var(--f-display);font-size:30px;line-height:1;color:var(--gold);font-weight:600}
+.nx b{font-family:var(--f-ui);font-size:15px;color:var(--ink);display:block;line-height:1.35}
+.nx p{font-family:var(--f-ui);font-size:13.5px;color:var(--ink-2);margin:6px 0 10px;line-height:1.45}
+.nx .own{display:inline-block;font-family:var(--f-ui);font-size:11.5px;font-weight:600;color:var(--ink-2);background:var(--sand);padding:3px 10px;border-radius:999px}
 </style>
 </head><body>
 <header class="hero" id="top">
@@ -200,13 +212,13 @@ footer .label{color:var(--band-ink-2)}
     <div class="map m4" aria-label="Report map">
       <a class="act-card" href="#act1"><span class="n">I</span><span class="t">November so far</span></a>
       <a class="act-card" href="#act2"><span class="n">II</span><span class="t">Search</span></a>
-      <a class="act-card" href="#act3"><span class="n">III</span><span class="t">The plan</span></a>
-      <a class="act-card" href="#act4"><span class="n">IV</span><span class="t">Automation</span></a>
+      <a class="act-card" href="#act3"><span class="n">III</span><span class="t">Automation</span></a>
+      <a class="act-card" href="#act4"><span class="n">IV</span><span class="t">The plan</span></a>
     </div>
   </div>
 </header>
 <nav class="bar" aria-label="Acts"><div class="wrap">
-  <a href="#act1" data-a="act1"><b>I</b>November so far</a><a href="#act2" data-a="act2"><b>II</b>Search</a><a href="#act3" data-a="act3"><b>III</b>The plan</a><a href="#act4" data-a="act4"><b>IV</b>Automation</a>
+  <a href="#act1" data-a="act1"><b>I</b>November so far</a><a href="#act2" data-a="act2"><b>II</b>Search</a><a href="#act3" data-a="act3"><b>III</b>Automation</a><a href="#act4" data-a="act4"><b>IV</b>The plan</a>
 </div><div class="prog"><i id="prog"></i></div></nav>
 
 <!-- ================= ACT I ================= -->
@@ -233,9 +245,9 @@ footer .label{color:var(--band-ink-2)}
   <div class="row">
     <figure class="c6 rv"><h3>Conversations started<small>Instagram + Facebook messaging · per month · <span class="thru">Nov 1–14</span> + projected</small></h3><div class="cv"><canvas id="cMsgs"></canvas></div>
       <figcaption>Meta Business Suite → Insights → Messaging.</figcaption></figure>
-    <figure class="c6 rv"><h3>Bookings build every week<small>People with open season bookings · faded = projected</small></h3><div class="cv"><canvas id="cWeekly"></canvas></div>
-      <div class="legend"><span><i style="background:var(--s2)"></i>Visitors</span><span><i style="background:var(--s3)"></i>Volunteers</span><span><i style="background:color-mix(in srgb,var(--ink-3) 30%,transparent);outline:1px dashed var(--ink-3)"></i>Projected at the average weekly add since Oct 30</span></div>
-      <figcaption>Retreat Guru weekly registration report. Visitors = all booked people minus volunteers (Volunteer Exchange 2026-27), so the two always add up. Workers and community members are not counted.</figcaption></figure>
+    <figure class="c6 rv"><h3>Bookings build every week<small>People with open season bookings, Oct 2 → Nov 13</small></h3><div class="cv"><canvas id="cWeekly"></canvas></div>
+      <div class="legend"><span><i style="background:var(--s2)"></i>Visitors</span><span><i style="background:var(--s3)"></i>Volunteers</span></div>
+      <figcaption>Retreat Guru weekly registration report. Visitors = all booked people minus volunteers, so the two always add up (October weeks restated the same way). Workers and community members are not counted.</figcaption></figure>
   </div>
   <div class="row">
     <figure class="c4 rv"><h3>Volunteer applications<small>Per month · <span class="thru">Nov 1–14</span> + projected</small></h3><div class="cv s"><canvas id="cVolApps"></canvas></div><figcaption>Retreat Guru, program 4253.</figcaption></figure>
@@ -267,31 +279,7 @@ footer .label{color:var(--band-ink-2)}
 
 <!-- ================= ACT III ================= -->
 <section class="act" id="act3"><div class="wrap"><span class="big" aria-hidden="true">III</span>
-  <div class="label">Act III · weekly report of Nov 13</div>
-  <h2>The plan, <em>measured weekly</em></h2>
-  <p>Programs against last season, the booking pipeline, the volunteer funnel, and the next 30 days.</p>
-</div></section>
-<div class="body"><div class="wrap">
-  <div class="row">
-    <figure class="c7 rv"><h3>Where to push: programs vs last season<small>Sign-ups at Nov 12 vs the same date in 2025 · started programs show their final</small></h3><div class="cv t" id="yoyWrap"><canvas id="cYoY"></canvas></div>
-      <div class="legend"><span><i style="background:var(--s1)"></i>Now (2026-27)</span><span><i style="background:var(--base)"></i>Same date last season</span><span><i style="background:var(--gold)"></i>Started: final count</span><span><i style="background:color-mix(in srgb,var(--gold) 35%,transparent)"></i>Last season's final</span></div>
-      <figcaption>Retreat Guru weekly registration report, cutoff Nov 12 (2026) vs Nov 12 (2025). Once a program starts, its count is final and is compared with last season's final. November Breathwork Training: final 7, confirmed by PachaMama (Retreat Guru shows 2 after 5 records were changed for payment reasons).</figcaption></figure>
-    <div class="c5" style="display:grid;gap:20px;align-content:start">
-      <figure class="rv"><h3>Turn pending into paid<small>460 open booking records, Nov 13</small></h3>
-        <div class="prop" id="propStatus" role="img" aria-label="Booking status, Nov 13"></div><div class="legend" id="propLegend"></div>
-        <div class="kpis k2" style="gap:8px"><div class="kpi"><span class="v num up">+64</span><span class="d">paid records since Oct 30 (105 → 169)</span></div><div class="kpi"><span class="v num up">−30</span><span class="d">pending since Oct 30 (171 → 141)</span></div></div>
-        <figcaption>Retreat Guru weekly registration report, Nov 13 (Oct 30 for the comparison).</figcaption></figure>
-      <figure class="rv"><h3>Volunteer funnel<small>Season to date, Nov 13</small></h3>
-        <div class="funnel" id="funnel"></div>
-        <figcaption>Retreat Guru: applications (all statuses) → people booked into Volunteer Exchange 2026-27. 26 new applications Nov 1–14. The page → form → submit steps come from GA4 and are added at the month-end refresh.</figcaption></figure>
-    </div>
-  </div>
-  <div class="tw rv"><table><thead><tr><th>Next 30 days · Nov 16 → Dec 15</th><th>Why</th><th>Owner</th></tr></thead><tbody id="next30"></tbody></table></div>
-</div></div>
-
-<!-- ================= ACT IV ================= -->
-<section class="act" id="act4"><div class="wrap"><span class="big" aria-hidden="true">IV</span>
-  <div class="label">Act IV · week of Nov 6–13</div>
+  <div class="label">Act III · week of Nov 6–13</div>
   <h2>The <em>booking router</em></h2>
   <p>Every booking runs through Retreat Guru → Zapier → Flodesk. This is how reliably those runs landed in the latest weekly health check.</p>
 </div></section>
@@ -302,6 +290,29 @@ footer .label{color:var(--band-ink-2)}
       <figcaption>Flodesk deliveries as read by the Zapier agent's weekly health check (Nov 13). Visitor orientation shows 0 in a week with 20+ visitor confirmations: being checked.</figcaption></figure>
     <div class="c5 tw rv"><table><thead><tr><th>Check · Nov 13</th><th>Status</th></tr></thead><tbody id="routerChecks"></tbody></table></div>
   </div>
+</div></div>
+
+<!-- ================= ACT IV ================= -->
+<section class="act" id="act4"><div class="wrap"><span class="big" aria-hidden="true">IV</span>
+  <div class="label">Act IV · weekly report of Nov 13</div>
+  <h2>The plan, <em>measured weekly</em></h2>
+  <p>Programs against last season, the booking pipeline, the volunteer funnel, and the next 30 days.</p>
+</div></section>
+<div class="body airy"><div class="wrap">
+  <figure class="rv"><h3>Where to push: programs vs last season<small>Sign-ups at Nov 12 vs the same date in 2025</small></h3>
+    <div class="legend"><span><i style="background:var(--s1)"></i>Now (2026-27)</span><span><i style="background:var(--base)"></i>Same date last season</span><span><i style="background:var(--gold)"></i>Started: final count</span><span><i style="background:color-mix(in srgb,var(--gold) 35%,transparent)"></i>Last season's final</span></div>
+    <div class="cv xl"><canvas id="cYoY"></canvas></div>
+    <figcaption>Retreat Guru weekly registration report. Once a program starts, its count is final and is compared with last season's final. November Breathwork: final 7, confirmed by PachaMama.</figcaption></figure>
+  <div class="row">
+    <figure class="c6 rv"><h3>Turn pending into paid<small>460 open booking records, Nov 13</small></h3>
+      <div class="prop" id="propStatus" role="img" aria-label="Booking status, Nov 13"></div><div class="legend" id="propLegend"></div>
+      <div class="kpis k2"><div class="kpi"><span class="v num up">+64</span><span class="d">paid since Oct 30</span></div><div class="kpi"><span class="v num up">−30</span><span class="d">pending since Oct 30</span></div></div>
+      <figcaption>Retreat Guru weekly registration report.</figcaption></figure>
+    <figure class="c6 rv"><h3>Volunteer funnel<small>Season to date, Nov 13</small></h3>
+      <div class="funnel" id="funnel"></div>
+      <figcaption>Retreat Guru. 26 new applications Nov 1–14. The page → form → submit steps from GA4 come with the month-end refresh.</figcaption></figure>
+  </div>
+  <div class="next rv"><h3>Next 30 days<small>Nov 16 → Dec 15</small></h3><div class="nextgrid" id="next30"></div></div>
 </div></div>
 
 <footer><div class="wrap"><div class="label">Sources</div>
@@ -324,7 +335,7 @@ const FEED='https://calm-rugelach-b0c748.netlify.app/api/report/public';
 /* ---- weekly figures not in the live feed (Retreat Guru weekly report + Zapier health check). Update each Friday. ---- */
 const WEEKLY={
   asOf:'Nov 13',
-  people:[['Oct 30',108,44],['Nov 6',109,47],['Nov 13',125,49]],   // [week, visitors, volunteers]; Oct 30 restated with the 11-13 rule
+  people:[['Oct 2',58,30],['Oct 9',65,30],['Oct 16',76,34],['Oct 23',94,36],['Oct 30',108,44],['Nov 6',109,47],['Nov 13',125,49]],   // [week, visitors, volunteers]; Oct weeks restated with the 11-13 rule (visitors = total − volunteers)
   status:[['Paid',169,'--s3'],['Pending',141,'--s1'],['Reserved',60,'--s2'],['Pay on arrival',51,'--gold'],['Checked in',27,'--sage'],['Checked out',12,'--base']],
   yoy:[ // [program, now, same date last season, last season final, started?]
    ['Early Nov Body Cleanse',9,12,12,1],['Nov Breathwork Training',7,16,16,1],['Transformation Cycle',1,7,7,0],['Late Nov Body Cleanse',1,3,9,0],
@@ -375,15 +386,11 @@ const S={ig:{l:[],v:[]},fol:{l:[],v:[]},msg:{l:[],v:[]},vol:{l:[],v:[]},inq:{l:[
 monthly('cIgViews',S.ig,'--s3','views',{big:1});monthly('cFollows',S.fol,'--s3','new follows');monthly('cMsgs',S.msg,'--s2','conversations',{thin:30});
 monthly('cVolApps',S.vol,'--s3','applications');monthly('cInq',S.inq,'--s2','inquiries');monthly('cBook',S.book,'--s1','bookings');
 
-mk.cWeekly=()=>{const o=base();const p=WEEKLY.people,tot=p.map(r=>r[1]+r[2]);const add=(tot[tot.length-1]-tot[0])/(p.length-1);
-  const fut=['Nov 20','Nov 27'];const labels=p.map(r=>r[0]).concat(fut);const n=p.length;
-  const projTot=fut.map((_,i)=>Math.round(tot[n-1]+add*(i+1)));
-  o.plugins.tooltip.filter=i=>i.raw!=null;o.plugins.tooltip.callbacks.footer=it=>{const i=it[0].dataIndex;return i<n?'Total: '+tot[i]:'Projected total: ~'+projTot[i-n]};
-  const surf=css('--surface'),i3=css('--ink-3');
-  return {type:'bar',data:{labels,datasets:[
-    bar(css('--s2'),p.map(r=>r[1]).concat([null,null]),{label:'Visitors',borderRadius:0,borderColor:surf,borderWidth:{top:2}}),
-    bar(css('--s3'),p.map(r=>r[2]).concat([null,null]),{label:'Volunteers'}),
-    bar(i3+'40',Array(n).fill(null).concat(projTot),{label:'Projected',borderColor:i3,borderWidth:1.5,borderDash:[4,3]})]},options:o}};
+mk.cWeekly=()=>{const o=base();const p=WEEKLY.people;
+  o.plugins.tooltip.callbacks.footer=it=>'Total: '+(p[it[0].dataIndex][1]+p[it[0].dataIndex][2]);const surf=css('--surface');
+  return {type:'bar',data:{labels:p.map(r=>r[0]),datasets:[
+    bar(css('--s2'),p.map(r=>r[1]),{label:'Visitors',borderRadius:0,borderColor:surf,borderWidth:{top:2}}),
+    bar(css('--s3'),p.map(r=>r[2]),{label:'Volunteers'})]},options:o}};
 
 let CPA=null;
 mk.cCpa=()=>{const o=base();o.scales.y.ticks.callback=v=>'$'+v;o.plugins.tooltip.callbacks.label=i=>' $'+i.raw+' per sign-up';const l=CPA_HIST.l.slice(),v=CPA_HIST.v.slice();if(CPA){l.push(rng());v.push(CPA)}
@@ -414,7 +421,7 @@ function buildAll(){Object.keys(mk).forEach(build)}
     const l=document.createElement('span');l.innerHTML='<i style="background:var('+s[2]+')"></i>'+s[0]+' '+s[1];lg.appendChild(l)});
   const fu=document.getElementById('funnel'),f0=WEEKLY.funnel[0][1];WEEKLY.funnel.forEach(f=>{const r=document.createElement('div');r.className='frow '+f[2];const w=Math.max(1,f[1]/f0*100);r.innerHTML='<span>'+f[0]+'</span><span class="bar"><i style="width:'+w+'%" data-w="'+w+'"></i></span><span class="n">'+fmt(f[1])+'</span>';fu.appendChild(r)});
   const conv=document.createElement('div');conv.className='frow';conv.innerHTML='<span><b>Applied → booked</b></span><span></span><span class="n"><b>'+Math.round(WEEKLY.funnel[1][1]/f0*100)+'%</b></span>';fu.appendChild(conv);
-  const nx=document.getElementById('next30');WEEKLY.next30.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML='<td class="w"><b>'+r[0]+'</b></td><td class="w">'+r[1]+'</td><td>'+r[2]+'</td>';nx.appendChild(tr)});
+  const nx=document.getElementById('next30');WEEKLY.next30.forEach((r,i)=>{const d=document.createElement('div');d.className='nx';d.innerHTML='<span class="i">'+(i+1)+'</span><div><b>'+r[0]+'</b><p>'+r[1]+'</p><span class="own">'+r[2]+'</span></div>';nx.appendChild(d)});
   const rt=document.getElementById('routerTiles');WEEKLY.router.tiles.forEach(t=>{const d=document.createElement('div');d.className='kpi';d.innerHTML='<span class="v num '+(t[2]==='up'?'up':t[2]==='bad'?'dn':'')+'">'+t[0]+'</span><span class="d">'+t[1]+'</span>';rt.appendChild(d)});
   const rc=document.getElementById('routerChecks');WEEKLY.router.checks.forEach(c=>{const tr=document.createElement('tr');tr.innerHTML='<td>'+c[0]+'</td><td><span class="chip '+c[2]+'">'+c[1]+'</span></td>';rc.appendChild(tr)});
 })();
