@@ -339,7 +339,7 @@ const WEEKLY={
   status:[['Paid',169,'--s3'],['Pending',141,'--s1'],['Reserved',60,'--s2'],['Pay on arrival',51,'--gold'],['Checked in',27,'--sage'],['Checked out',12,'--base']],
   yoy:[ // [program, now, same date last season, last season final, started?]
    ['Early Nov Body Cleanse',9,12,12,1],['Nov Breathwork Training',7,16,16,1],['Transformation Cycle',1,7,7,0],['Late Nov Body Cleanse',1,3,9,0],
-   ['Dec Spa Day',2,2,5,0],['Dec Wisdom of Breath',2,2,5,0],['Dec Medicine of Mantra',2,3,8,0],['Dec Silent / Vipassana',23,17,61,0],
+   ['Dec Wisdom of Breath',2,2,5,0],['Dec Medicine of Mantra',2,3,8,0],['Dec Silent + Vipassana + Who Is In',23,17,61,0],
    ['Dec Family Constellation',5,3,21,0],['Jan Body Cleanse',4,12,30,0],['Jan 5 Days to Live and Die',2,0,19,0],['Jan Restorative YTT',3,0,5,0],
    ['Red Temple L1',4,1,20,0],['Feb Silence-Music-Prayer',1,2,20,0],['Feb Silent Retreat',5,1,34,0],['Volunteer Exchange',49,43,103,0]],
   funnel:[['Volunteer applications (season)',179,''],['Booked as volunteers',49,'real']],
@@ -400,7 +400,7 @@ let BR=null;
 mk.cBrand=()=>{if(!BR)return null;const o=base();o.plugins.tooltip.filter=i=>i.raw!=null;o.plugins.tooltip.callbacks.label=i=>i.datasetIndex===0?' '+fmt(i.raw)+' clicks':' ~'+fmt(BR.nov+i.raw)+' projected for November';const c=css('--s2');
   return {type:'bar',data:{labels:['October',partial()?rng():'November'],datasets:[bar([c+'99',c],[BR.oct,BR.nov],{borderRadius:partial()?[{topLeft:4,topRight:4},0]:{topLeft:4,topRight:4}}),bar(c+'40',[null,partial()?proj(BR.nov)-BR.nov:null],{borderColor:c,borderWidth:1.5,borderDash:[4,3]})]},options:o}};
 
-mk.cYoY=()=>{const o=base();const y=WEEKLY.yoy;o.indexAxis='y';o.scales={x:{grid:{color:css('--rule')},border:{display:false},ticks:{color:css('--ink-3')},beginAtZero:true},y:{grid:{display:false},ticks:{color:css('--ink-2'),autoSkip:false,font:{size:11}}}};
+mk.cYoY=()=>{const o=base();const y=WEEKLY.yoy;o.indexAxis='y';o.interaction={mode:'index',intersect:false,axis:'y'};o.scales={x:{grid:{color:css('--rule')},border:{display:false},ticks:{color:css('--ink-3')},beginAtZero:true},y:{grid:{display:false},ticks:{color:css('--ink-2'),autoSkip:false,font:{size:11}}}};
   o.plugins.tooltip.callbacks.label=i=>{const r=y[i.dataIndex];return r[4]?(i.datasetIndex===0?' Final count: '+r[1]:' Last season final: '+r[3]):(i.datasetIndex===0?' Now: '+r[1]:' Same date last season: '+r[2])};
   o.plugins.tooltip.callbacks.footer=it=>{const r=y[it[0].dataIndex];return r[4]?'Started · confirmed year over year':'Last season final: '+r[3]};
   const g=css('--gold');
@@ -408,7 +408,7 @@ mk.cYoY=()=>{const o=base();const y=WEEKLY.yoy;o.indexAxis='y';o.scales={x:{grid
     {label:'Now',data:y.map(r=>r[1]),backgroundColor:y.map(r=>r[4]?g:css('--s1')),borderRadius:{topRight:4,bottomRight:4},borderSkipped:'left',barPercentage:.8,categoryPercentage:.75},
     {label:'Compare',data:y.map(r=>r[4]?r[3]:r[2]),backgroundColor:y.map(r=>r[4]?g+'59':css('--base')),borderRadius:{topRight:4,bottomRight:4},borderSkipped:'left',barPercentage:.8,categoryPercentage:.75}]},options:o}};
 
-mk.cRouter=()=>{const o=base();o.indexAxis='y';o.scales={x:{grid:{color:css('--rule')},border:{display:false},ticks:{color:css('--ink-3')},beginAtZero:true},y:{grid:{display:false},ticks:{color:css('--ink-2')}}};
+mk.cRouter=()=>{const o=base();o.indexAxis='y';o.interaction={mode:'index',intersect:false,axis:'y'};o.scales={x:{grid:{color:css('--rule')},border:{display:false},ticks:{color:css('--ink-3')},beginAtZero:true},y:{grid:{display:false},ticks:{color:css('--ink-2')}}};
   o.plugins.tooltip.callbacks.label=i=>' '+i.raw+' delivered'+(i.dataIndex===1?' (at least)':'');const r=WEEKLY.router.sends;
   return {type:'bar',data:{labels:r.map(x=>x[0]),datasets:[{data:r.map(x=>x[1]),backgroundColor:r.map(x=>x[1]===0?css('--s1'):css('--s3')),borderRadius:{topRight:4,bottomRight:4},borderSkipped:'left',barPercentage:.7,minBarLength:3}]},options:o}};
 
