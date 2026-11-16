@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>PachaMama Marketing Report · November 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: five acts, each opened by a forest-green band; inside, a wide grid of chart panels. Visual-first: charts ~70%, tables ~20%, text ~10%. */
+:root{
+  --bg:#FBF7EF; --surface:#FFFFFF; --sand:#E9E7DC; --ink:#22201C; --ink-2:#4E4A42; --ink-3:#7A7468;
+  --rule:#DFD8C9; --sage:#6F7A52; --terra:#9A4A2F; --clay:#5A3327; --gold:#B5862A;
+  --band:#243B2A; --band-2:#2E4A35; --band-ink:#F6EFE2; --band-ink-2:#C2CBB0;
+  --s1:#C2552D; --s2:#1F75AD; --s3:#3F8A3F; --base:#B9B2A3;
+  --good:#3F7A3A; --warn:#A8701A; --bad:#A63A2A;
+  --f-display:"Cormorant Garamond","Cormorant",Georgia,"Times New Roman",serif;
+  --f-body:"Lora",Georgia,"Times New Roman",serif;
+  --f-ui:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121915; --surface:#1A231D; --sand:#243029; --ink:#EFE9DC; --ink-2:#C9C2B3; --ink-3:#958E80;
+  --rule:#2E3A32; --sage:#AAB58E; --terra:#E08A66; --clay:#E3B49C; --gold:#D9AE57;
+  --band:#0C120E; --band-2:#16201A; --band-ink:#F1EADB; --band-ink-2:#B5BEA3;
+  --s1:#D2643A; --s2:#3C8FCF; --s3:#4E9E4E; --base:#5E655F;
+  --good:#79B86F; --warn:#D9A23E; --bad:#E07A66; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121915; --surface:#1A231D; --sand:#243029; --ink:#EFE9DC; --ink-2:#C9C2B3; --ink-3:#958E80;
+  --rule:#2E3A32; --sage:#AAB58E; --terra:#E08A66; --clay:#E3B49C; --gold:#D9AE57;
+  --band:#0C120E; --band-2:#16201A; --band-ink:#F1EADB; --band-ink-2:#B5BEA3;
+  --s1:#D2643A; --s2:#3C8FCF; --s3:#4E9E4E; --base:#5E655F;
+  --good:#79B86F; --warn:#D9A23E; --bad:#E07A66; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--band)}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.05;text-wrap:balance;margin:0}
+p{margin:0}
+.label{font-family:var(--f-ui);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--sage)}
+.num{font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--s2);outline-offset:2px}
+
+/* ---------- Hero: the map ---------- */
+.hero{background:var(--band);color:var(--band-ink)}
+.hero .wrap{padding-block:44px 40px;display:grid;gap:28px}
+.hero .label{color:var(--band-ink-2)}
+.hero h1{font-size:clamp(40px,6vw,72px);color:var(--band-ink)}
+.hero h1 em{color:var(--gold);font-style:italic;font-weight:500}
+.hero .sub{font-family:var(--f-ui);font-size:14px;color:var(--band-ink-2);display:flex;flex-wrap:wrap;gap:6px 22px}
+.map{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:act}
+@media (max-width:980px){.map{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.map{grid-template-columns:1fr}}
+.act-card{display:grid;grid-template-rows:auto 1fr;gap:10px;padding:18px 18px 20px;min-height:116px;background:var(--band-2);border:1px solid color-mix(in srgb,var(--band-ink) 14%,transparent);border-radius:6px;color:var(--band-ink);text-decoration:none;transition:transform .25s ease,border-color .25s ease;min-width:0}
+.act-card:hover{transform:translateY(-3px);border-color:var(--gold)}
+.act-card .n{font-family:var(--f-display);font-size:36px;line-height:1;color:var(--gold);font-weight:600}
+.act-card .t{font-family:var(--f-display);font-size:25px;align-self:end;line-height:1.1;font-weight:600}
+.act-card ul{margin:0;padding:0;list-style:none;font-family:var(--f-ui);font-size:12.5px;color:var(--band-ink-2);display:grid;gap:3px}
+.act-card .k{display:flex;align-items:baseline;gap:8px;font-family:var(--f-ui);font-size:12px;color:var(--band-ink-2);border-top:1px solid color-mix(in srgb,var(--band-ink) 14%,transparent);padding-top:8px}
+.act-card .k b{font-family:var(--f-display);font-size:24px;color:var(--band-ink);font-weight:600}
+.act-card svg{width:100%;height:34px;display:block}
+
+/* ---------- Sticky act bar + progress ---------- */
+nav.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+nav.bar .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:none}
+nav.bar a{flex:0 0 auto;font-family:var(--f-ui);font-size:13px;color:var(--ink-3);text-decoration:none;padding:6px 12px;border-radius:999px;white-space:nowrap;transition:background .2s,color .2s}
+nav.bar a b{font-weight:600;margin-right:6px;color:inherit}
+nav.bar a:hover{color:var(--ink);background:var(--sand)}
+nav.bar a.on{background:var(--band);color:var(--band-ink)}
+.prog{height:3px;background:var(--rule)}
+.prog i{display:block;height:100%;width:0;background:var(--gold);transition:width .1s linear}
+
+/* ---------- Act bands ---------- */
+.act{position:relative;overflow:hidden;background:var(--band);color:var(--band-ink)}
+.act .wrap{padding-block:56px 44px;display:grid;gap:10px;position:relative;z-index:1}
+.act .big{position:absolute;right:max(16px,4vw);top:8px;font-family:var(--f-display);font-weight:700;font-size:clamp(160px,24vw,320px);line-height:1;color:color-mix(in srgb,var(--band-ink) 7%,transparent);pointer-events:none;will-change:transform}
+.act h2{font-size:clamp(36px,5.5vw,62px);color:var(--band-ink);max-width:18ch}
+.act h2 em{color:var(--gold);font-style:italic;font-weight:500}
+.act p{font-family:var(--f-ui);font-size:15px;color:var(--band-ink-2);max-width:62ch}
+.act .label{color:var(--band-ink-2)}
+
+/* ---------- Panels ---------- */
+.body{padding-block:32px 56px}
+.body .wrap{display:grid;gap:20px}
+.row{display:grid;gap:20px;grid-template-columns:repeat(12,minmax(0,1fr))}
+.c12{grid-column:span 12}.c8{grid-column:span 8}.c7{grid-column:span 7}.c6{grid-column:span 6}.c5{grid-column:span 5}.c4{grid-column:span 4}
+@media (max-width:900px){.c8,.c7,.c6,.c5,.c4{grid-column:span 12}}
+.row>*{min-width:0}
+figure>*{min-width:0}
+figure{margin:0;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:18px 18px 12px;display:grid;gap:10px;align-content:start}
+figure h3{font-size:21px;color:var(--ink)}
+figure h3 small{display:block;font-family:var(--f-ui);font-size:12px;font-weight:400;color:var(--ink-3);margin-top:4px;letter-spacing:0}
+.cv{position:relative;height:290px;width:100%;min-width:0}
+.cv.t{height:360px}.cv.s{height:210px}.cv.xs{height:170px}
+.odk{display:flex;gap:18px;flex-wrap:wrap;margin:6px 0 4px}.odk>div{display:flex;flex-direction:column}.odk b{font-family:var(--f-display);font-size:40px;line-height:1;font-weight:600}.odk span{font-family:var(--f-ui);font-size:12px;color:var(--ink-3)}
+.odc svg text,#odChart svg text{font-family:var(--f-ui);font-size:11px;fill:var(--ink-3)}.odwait{font-family:var(--f-ui);font-size:12.5px;color:var(--ink-3)}
+figcaption{font-family:var(--f-ui);font-size:11.5px;color:var(--ink-3);line-height:1.45}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--f-ui);font-size:12.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.legend i.ln{height:3px;border-radius:2px;width:16px}
+
+/* KPI strip */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:820px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.cv{height:250px}.cv.t{height:330px}.kpi .v{font-size:32px}figure{padding:14px 12px 10px}}
+.kpi{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:16px;display:grid;gap:4px}
+.kpi .v{font-family:var(--f-display);font-weight:600;font-size:clamp(34px,4.4vw,50px);line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.kpi .v.up{color:var(--good)}.cv .empty{position:absolute;inset:0;display:grid;place-items:center;margin:0;font:13px var(--f-ui);color:var(--ink-3)}.cv{position:relative}.score td,.score th{font-variant-numeric:tabular-nums}.partial.gone{display:none}.kpi .v.down{color:var(--bad)}
+.kpi .d{font-family:var(--f-ui);font-size:12.5px;color:var(--ink-2);line-height:1.35}
+
+.kpis.k3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:560px){.kpis.k3{grid-template-columns:1fr}}
+/* Competitor table: stacks into cards on narrow screens */
+.tw.comp td{white-space:normal}
+@media (max-width:640px){.tw.comp table,.tw.comp tbody,.tw.comp tr,.tw.comp td{display:block;width:100%}.tw.comp thead{display:none}.tw.comp tr{padding:10px 12px;border-bottom:1px solid var(--rule)}.tw.comp td{border:0;padding:2px 0;text-align:left}.tw.comp td::before{content:attr(data-l);display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}}
+/* Rating scale */
+.rate{padding:28px 8px 6px;--lo:3.5;--hi:5.0;overflow:hidden}
+.rate-track{position:relative;height:170px;border-bottom:2px solid var(--rule)}
+.rate-band,.rate-us,.rate-dots i,.rate-axis span{--x:calc((var(--v,var(--from)) - var(--lo)) / (var(--hi) - var(--lo)) * 100%)}
+.rate-band{position:absolute;bottom:0;top:0;left:calc((var(--from) - var(--lo)) / (var(--hi) - var(--lo)) * 100%);width:calc((var(--to) - var(--from)) / (var(--hi) - var(--lo)) * 100%);background:color-mix(in srgb,var(--s3) 18%,transparent);border-left:2px solid var(--s3);border-right:2px solid var(--s3);border-radius:4px 4px 0 0}
+.rate-band span{position:absolute;top:-22px;right:0;text-align:right;font-family:var(--f-ui);font-size:12px;font-weight:600;color:var(--good);white-space:nowrap}
+.rate-dots i{position:absolute;left:var(--x);bottom:calc(var(--y) * 1px);width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--s3);border:2px solid var(--surface);transition:transform .8s cubic-bezier(.2,.7,.2,1),opacity .8s}
+.rate-us{position:absolute;left:var(--x);bottom:0;top:8px;width:0;border-left:3px solid var(--s1);transition:left 1.2s cubic-bezier(.2,.7,.2,1)}
+.rate-us b{position:absolute;top:-6px;right:10px;font-family:var(--f-display);font-size:40px;line-height:1;color:var(--s1)}
+.rate-us span{position:absolute;top:36px;right:10px;font-family:var(--f-ui);font-size:12px;font-weight:600;color:var(--s1);white-space:nowrap}
+.rate-axis{position:relative;height:22px;font-family:var(--f-ui);font-size:12px;color:var(--ink-3)}
+.rate-axis span{position:absolute;left:var(--x);transform:translateX(-50%);top:4px}
+.rate-axis span:first-child{transform:none}.rate-axis span:last-child{transform:translateX(-100%)}
+.js .rate-fig.pre .rate-us{left:0}
+.js .rate-fig.pre .rate-dots i{transform:translateY(-60px);opacity:0}
+@media (prefers-reduced-motion:reduce){.rate-us,.rate-dots i{transition:none}}
+/* Tables */
+.tw{overflow-x:auto;border:1px solid var(--rule);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-family:var(--f-ui);font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--rule)}
+td{white-space:nowrap}
+td.w{white-space:normal;min-width:220px}
+th{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;background:var(--sand)}
+.r{text-align:right}
+tr:last-child td{border-bottom:0}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-ui);font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.chip.good{color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
+.chip.warn{color:var(--warn);background:color-mix(in srgb,var(--warn) 14%,transparent)}
+.chip.bad{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.chip.info{color:var(--ink-2);background:var(--sand)}
+
+/* Proportion + funnel */
+.prop{display:flex;height:44px;gap:2px;border-radius:5px;overflow:hidden}
+.prop div{display:flex;align-items:center;justify-content:center;font-family:var(--f-ui);font-size:12.5px;font-weight:600;color:#fff;min-width:0;overflow:hidden;white-space:nowrap;transition:flex-grow .9s cubic-bezier(.2,.7,.2,1)}
+.funnel{display:grid;gap:7px}
+.frow{display:grid;grid-template-columns:minmax(110px,190px) 1fr 58px;gap:10px;align-items:center;font-family:var(--f-ui);font-size:13px;color:var(--ink-2)}
+.frow .bar{height:20px;background:var(--sand);border-radius:0 4px 4px 0;overflow:hidden}
+.frow .bar i{display:block;height:100%;background:var(--s2);border-radius:0 4px 4px 0;transition:width 1s cubic-bezier(.2,.7,.2,1)}
+.frow.real .bar i{background:var(--s3)}.frow.leak .bar i{background:var(--s1)}
+.frow .n{text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* Before / after */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media (max-width:760px){.ba{grid-template-columns:1fr}}
+.ba-col{display:grid;gap:10px;justify-items:start;min-width:0}
+.ba-col img{width:100%;max-width:100%;height:auto;border:1px solid var(--rule);border-radius:4px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.ba-col.after img{max-width:420px;justify-self:center}
+.ba-note{font-family:var(--f-ui);font-size:12.5px;color:var(--ink-2)}
+.lanes{display:grid;gap:6px;font-family:var(--f-ui);font-size:12.5px}
+.lanes div{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:8px 10px;background:var(--sand);border-radius:4px}
+.lanes b{color:var(--ink)}.lanes span{color:var(--ink-2)}
+/* Flow + placeholders */
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:var(--f-ui);font-size:12.5px}
+.flow span{background:var(--sand);padding:7px 10px;border-radius:4px;color:var(--ink)}
+.flow b{color:var(--ink-3);font-weight:400}
+.soon{display:grid;gap:8px;place-content:center;justify-items:center;text-align:center;min-height:150px;border:1px dashed var(--ink-3);border-radius:6px;padding:16px;font-family:var(--f-ui);font-size:12.5px;color:var(--ink-3)}
+.soon b{font-family:var(--f-display);font-size:20px;color:var(--ink);font-weight:600}
+
+/* Reveal: elements are visible at rest; they get a gentle lift the first time they enter view */
+.rv{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .rv.pre{transform:translateY(18px)}
+@media (prefers-reduced-motion:reduce){.rv,.act-card,.prop div,.frow .bar i{transition:none!important}.js .rv.pre{transform:none}}
+
+footer{background:var(--band);color:var(--band-ink-2)}
+footer .wrap{padding-block:32px 48px;display:grid;gap:8px;font-family:var(--f-ui);font-size:12px;line-height:1.5}
+footer .label{color:var(--band-ink-2)}
+
+.months{display:flex;gap:6px;flex-wrap:wrap;font-family:var(--f-ui);font-size:13px}.months a{color:var(--band-ink-2);text-decoration:none;padding:4px 12px;border-radius:999px;border:1px solid color-mix(in srgb,var(--band-ink) 22%,transparent)}.months a.on{background:var(--gold);border-color:var(--gold);color:var(--band)}.months a:hover{border-color:var(--gold)}
+
+.partbar{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;background:color-mix(in srgb,var(--gold) 18%,transparent);border:1px solid var(--gold);border-radius:6px;padding:10px 14px;font-family:var(--f-ui);font-size:13.5px;color:var(--band-ink)}
+.partbar b{color:var(--gold);font-size:15px}.partbar.gone{display:none}
+.map.m4{grid-template-columns:repeat(4,minmax(0,1fr))}@media (max-width:980px){.map.m4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpis.k2{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi .v.dn{color:var(--bad)}
+</style>
+</head><body>
+<header class="hero" id="top">
+  <div class="wrap">
+    <nav class="months" aria-label="Report months"><a href="/2026-10/">October 2026</a><a href="/2026-11/" class="on" aria-current="page">November 2026</a></nav>
+    <div class="label">PachaMama Eco Village · Marketing &amp; Sales · November 2026</div>
+    <h1>Marketing Report <em>November 2026</em></h1>
+    <div class="sub"><span>Prepared by Kayel Rion</span><span id="repUpdated">Mid-month refresh</span></div>
+    <div class="partbar" id="partBar"><b id="partRange">Nov 1–14 only</b><span id="partNote">This is a mid-month refresh: every number covers November so far, not the full month. Faded bar ends are the month-end projection at the current daily pace.</span></div>
+    <div class="map m4" aria-label="Report map">
+      <a class="act-card" href="#act1"><span class="n">I</span><span class="t">November so far</span></a>
+      <a class="act-card" href="#act2"><span class="n">II</span><span class="t">Search</span></a>
+      <a class="act-card" href="#act3"><span class="n">III</span><span class="t">The plan</span></a>
+      <a class="act-card" href="#act4"><span class="n">IV</span><span class="t">Automation</span></a>
+    </div>
+  </div>
+</header>
+<nav class="bar" aria-label="Acts"><div class="wrap">
+  <a href="#act1" data-a="act1"><b>I</b>November so far</a><a href="#act2" data-a="act2"><b>II</b>Search</a><a href="#act3" data-a="act3"><b>III</b>The plan</a><a href="#act4" data-a="act4"><b>IV</b>Automation</a>
+</div><div class="prog"><i id="prog"></i></div></nav>
+
+<!-- ================= ACT I ================= -->
+<section class="act" id="act1"><div class="wrap"><span class="big" aria-hidden="true">I</span>
+  <div class="label">Act I · <span class="thru">Nov 1–14</span></div>
+  <h2>November <em>so far</em></h2>
+  <p>Where November stands at mid-month, and where it lands if the current daily pace holds.</p>
+</div></section>
+<div class="body"><div class="wrap">
+  <div class="kpis" id="tiles"></div>
+  <div class="row">
+    <figure class="c12 rv" id="usersDaily"><h3>Website users, every day since Aug 1<small id="udSrc">GA4 · total users by day · live from the Command Center</small></h3>
+      <div class="odk"><div><b id="udLast">–</b><span id="udLastL">latest day</span></div><div><b id="ud7">–</b><span>7-day average</span></div><div><b id="udVs">–</b><span>vs. summer baseline (~150/day)</span></div></div>
+      <div id="udChart" class="odc"><p class="odwait">The users line loads from the Command Center.</p></div>
+      <figcaption>GA4, total users by day · grey dashes = 7-day average · dashed marker = Aug 17, when campaigns and the posting rhythm switched on.</figcaption></figure>
+  </div>
+  <div class="row">
+    <figure class="c6 rv"><h3>Instagram views<small>Views per month · <span class="thru">Nov 1–14</span> + projected month-end</small></h3><div class="cv"><canvas id="cIgViews"></canvas></div>
+      <div class="legend"><span><i style="background:var(--s3)"></i>Actual</span><span><i style="background:color-mix(in srgb,var(--s3) 30%,transparent);outline:1px dashed var(--s3)"></i>Projected rest of November</span></div>
+      <figcaption>Meta Business Suite, @pachamama_eco_village. Views fell from ~50K to ~11K a day after the Visit Us boosts stopped on Nov 4; the always-on Discovery campaign is tuned for follows instead.</figcaption></figure>
+    <figure class="c6 rv"><h3>New followers<small>Instagram follows per month · <span class="thru">Nov 1–14</span> + projected</small></h3><div class="cv"><canvas id="cFollows"></canvas></div>
+      <figcaption>Meta Business Suite. <b id="followersNow">–</b> followers now.</figcaption></figure>
+  </div>
+  <div class="row">
+    <figure class="c6 rv"><h3>Conversations started<small>Instagram + Facebook messaging · per month · <span class="thru">Nov 1–14</span> + projected</small></h3><div class="cv"><canvas id="cMsgs"></canvas></div>
+      <figcaption>Meta Business Suite → Insights → Messaging.</figcaption></figure>
+    <figure class="c6 rv"><h3>Bookings build every week<small>People with open season bookings · faded = projected</small></h3><div class="cv"><canvas id="cWeekly"></canvas></div>
+      <div class="legend"><span><i style="background:var(--s2)"></i>Visitors</span><span><i style="background:var(--s3)"></i>Volunteers</span><span><i style="background:color-mix(in srgb,var(--ink-3) 30%,transparent);outline:1px dashed var(--ink-3)"></i>Projected at the average weekly add since Oct 30</span></div>
+      <figcaption>Retreat Guru weekly registration report. Visitors = all booked people minus volunteers (Volunteer Exchange 2026-27), so the two always add up. Workers and community members are not counted.</figcaption></figure>
+  </div>
+  <div class="row">
+    <figure class="c4 rv"><h3>Volunteer applications<small>Per month · <span class="thru">Nov 1–14</span> + projected</small></h3><div class="cv s"><canvas id="cVolApps"></canvas></div><figcaption>Retreat Guru, program 4253.</figcaption></figure>
+    <figure class="c4 rv"><h3>Inquiries<small>Guest inquiries per month · <span class="thru">Nov 1–14</span> + projected</small></h3><div class="cv s"><canvas id="cInq"></canvas></div><figcaption>Retreat Guru, guest inquiries.</figcaption></figure>
+    <figure class="c4 rv"><h3>Bookings made<small>Programs, stays, volunteers · <span class="thru">Nov 1–14</span> + projected</small></h3><div class="cv s"><canvas id="cBook"></canvas></div><figcaption>Retreat Guru, bookings created in the month.</figcaption></figure>
+  </div>
+  <div class="row">
+    <figure class="c12 rv"><h3>Ad cost per program sign-up<small>Google + Meta spend ÷ program sign-ups, USD</small></h3><div class="cv s"><canvas id="cCpa"></canvas></div>
+      <figcaption>Break-even ceiling for a gateway guest ≈ $258–380. <b>Note:</b> Meta can't yet see bookings, so sign-ups that came through Meta ads aren't credited to them; the true cost per sign-up is likely lower. <span id="cpaNote"></span></figcaption></figure>
+  </div>
+</div></div>
+
+<!-- ================= ACT II ================= -->
+<section class="act" id="act2"><div class="wrap"><span class="big" aria-hidden="true">II</span>
+  <div class="label">Act II · <span class="thru">Nov 1–14</span></div>
+  <h2>Search</h2>
+  <p>Organic search, tracked every day, and how many people look us up by name.</p>
+</div></section>
+<div class="body"><div class="wrap"><div class="row">
+  <figure class="c7 rv" id="orgDaily"><h3>Organic search, every day<small id="odSrc">GA4 · live from the Command Center</small></h3>
+    <div class="odk"><div><b id="odLast">–</b><span id="odLastL">latest day</span></div><div><b id="od7">–</b><span>7-day average</span></div><div><b id="odVs">–</b><span>of the ~220/day before Mar 2025</span></div></div>
+    <div id="odChart" class="odc"><p class="odwait">The organic line loads from the Command Center.</p></div>
+    <figcaption>GA4, organic search sessions by day · grey dashes = 7-day average.</figcaption></figure>
+  <figure class="c5 rv"><h3 id="brandTitle">People searching our name<small>Google clicks on "pachamama" searches</small></h3>
+    <div class="cv s"><canvas id="cBrand"></canvas></div>
+    <div class="kpis k2"><div class="kpi"><span class="v num" id="kBrand28">–</span><span class="d" id="kBrand28D">brand clicks, last 28 days</span></div><div class="kpi"><span class="v num" id="kBrandNov">–</span><span class="d" id="kBrandNovD">brand clicks, Nov 1–14</span></div></div>
+    <figcaption>Google Search Console. Bars: October full month vs November so far + projected month-end.</figcaption></figure>
+</div></div></div>
+
+<!-- ================= ACT III ================= -->
+<section class="act" id="act3"><div class="wrap"><span class="big" aria-hidden="true">III</span>
+  <div class="label">Act III · weekly report of Nov 13</div>
+  <h2>The plan, <em>measured weekly</em></h2>
+  <p>Programs against last season, the booking pipeline, the volunteer funnel, and the next 30 days.</p>
+</div></section>
+<div class="body"><div class="wrap">
+  <div class="row">
+    <figure class="c7 rv"><h3>Where to push: programs vs last season<small>Sign-ups at Nov 12 vs the same date in 2025 · started programs show their final</small></h3><div class="cv t" id="yoyWrap"><canvas id="cYoY"></canvas></div>
+      <div class="legend"><span><i style="background:var(--s1)"></i>Now (2026-27)</span><span><i style="background:var(--base)"></i>Same date last season</span><span><i style="background:var(--gold)"></i>Started: final count</span><span><i style="background:color-mix(in srgb,var(--gold) 35%,transparent)"></i>Last season's final</span></div>
+      <figcaption>Retreat Guru weekly registration report, cutoff Nov 12 (2026) vs Nov 12 (2025). Once a program starts, its count is final and is compared with last season's final. November Breathwork Training: final 7, confirmed by PachaMama (Retreat Guru shows 2 after 5 records were changed for payment reasons).</figcaption></figure>
+    <div class="c5" style="display:grid;gap:20px;align-content:start">
+      <figure class="rv"><h3>Turn pending into paid<small>460 open booking records, Nov 13</small></h3>
+        <div class="prop" id="propStatus" role="img" aria-label="Booking status, Nov 13"></div><div class="legend" id="propLegend"></div>
+        <div class="kpis k2" style="gap:8px"><div class="kpi"><span class="v num up">+64</span><span class="d">paid records since Oct 30 (105 → 169)</span></div><div class="kpi"><span class="v num up">−30</span><span class="d">pending since Oct 30 (171 → 141)</span></div></div>
+        <figcaption>Retreat Guru weekly registration report, Nov 13 (Oct 30 for the comparison).</figcaption></figure>
+      <figure class="rv"><h3>Volunteer funnel<small>Season to date, Nov 13</small></h3>
+        <div class="funnel" id="funnel"></div>
+        <figcaption>Retreat Guru: applications (all statuses) → people booked into Volunteer Exchange 2026-27. 26 new applications Nov 1–14. The page → form → submit steps come from GA4 and are added at the month-end refresh.</figcaption></figure>
+    </div>
+  </div>
+  <div class="tw rv"><table><thead><tr><th>Next 30 days · Nov 16 → Dec 15</th><th>Why</th><th>Owner</th></tr></thead><tbody id="next30"></tbody></table></div>
+</div></div>
+
+<!-- ================= ACT IV ================= -->
+<section class="act" id="act4"><div class="wrap"><span class="big" aria-hidden="true">IV</span>
+  <div class="label">Act IV · week of Nov 6–13</div>
+  <h2>The <em>booking router</em></h2>
+  <p>Every booking runs through Retreat Guru → Zapier → Flodesk. This is how reliably those runs landed in the latest weekly health check.</p>
+</div></section>
+<div class="body"><div class="wrap">
+  <div class="kpis" id="routerTiles"></div>
+  <div class="row">
+    <figure class="c7 rv"><h3>Emails delivered by the router<small>Nov 6–13, by sequence</small></h3><div class="cv s"><canvas id="cRouter"></canvas></div>
+      <figcaption>Flodesk deliveries as read by the Zapier agent's weekly health check (Nov 13). Visitor orientation shows 0 in a week with 20+ visitor confirmations: being checked.</figcaption></figure>
+    <div class="c5 tw rv"><table><thead><tr><th>Check · Nov 13</th><th>Status</th></tr></thead><tbody id="routerChecks"></tbody></table></div>
+  </div>
+</div></div>
+
+<footer><div class="wrap"><div class="label">Sources</div>
+  <div>Live from the PachaMama Command Center: GA4, Google Search Console, Retreat Guru, Google Ads, Meta (via the Meta agent's daily run). Weekly figures: the Retreat Guru weekly registration report and the Zapier agent's weekly email health check. Mid-month refreshes cover part of the month only; projections are the month-to-date total ÷ days elapsed × days in the month.</div>
+  <div>Prepared by Kayel Rion · PachaMama Eco Village · <a href="/2026-10/" style="color:var(--band-ink)">October 2026 report</a></div>
+</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function(){
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;document.documentElement.classList.add('js');
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const fmt=n=>Math.round(n).toLocaleString('en-US');
+const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const ym=k=>M[+k.slice(5,7)-1]+" '"+k.slice(2,4);
+const setT=(id,t)=>{const e=document.getElementById(id);if(e&&t!=null)e.textContent=t};
+const PAGE='2026-11';
+const FEED='https://calm-rugelach-b0c748.netlify.app/api/report/public';
+
+/* ---- weekly figures not in the live feed (Retreat Guru weekly report + Zapier health check). Update each Friday. ---- */
+const WEEKLY={
+  asOf:'Nov 13',
+  people:[['Oct 30',108,44],['Nov 6',109,47],['Nov 13',125,49]],   // [week, visitors, volunteers]; Oct 30 restated with the 11-13 rule
+  status:[['Paid',169,'--s3'],['Pending',141,'--s1'],['Reserved',60,'--s2'],['Pay on arrival',51,'--gold'],['Checked in',27,'--sage'],['Checked out',12,'--base']],
+  yoy:[ // [program, now, same date last season, last season final, started?]
+   ['Early Nov Body Cleanse',9,12,12,1],['Nov Breathwork Training',7,16,16,1],['Transformation Cycle',1,7,7,0],['Late Nov Body Cleanse',1,3,9,0],
+   ['Dec Spa Day',2,2,5,0],['Dec Wisdom of Breath',2,2,5,0],['Dec Medicine of Mantra',2,3,8,0],['Dec Silent / Vipassana',23,17,61,0],
+   ['Dec Family Constellation',5,3,21,0],['Jan Body Cleanse',4,12,30,0],['Jan 5 Days to Live and Die',2,0,19,0],['Jan Restorative YTT',3,0,5,0],
+   ['Red Temple L1',4,1,20,0],['Feb Silence-Music-Prayer',1,2,20,0],['Feb Silent Retreat',5,1,34,0],['Volunteer Exchange',49,43,103,0]],
+  funnel:[['Volunteer applications (season)',179,''],['Booked as volunteers',49,'real']],
+  router:{tiles:[['52/52','morning intake matched to Retreat Guru','up'],['9/9','Zaps switched on','up'],['2','Zap errors (Nov 11, Flodesk step missing the email)',''],['4','paid guests missed their post-program email','bad']],
+    sends:[['Program confirmation',44],['Visitor confirmation',20],['Volunteer orientation',9],['Post-program',2],['Visitor orientation',0]],
+    checks:[['Morning intake match','52/52','good'],['Zaps on','9/9','good'],['Errors','2 on Nov 11','warn'],['Missed post-program emails','4 (blank Flow Status rows)','bad'],['Zapier tasks','1,147 / 2,000 · ~1,850 by Nov 24','warn'],['Approved skips','2 of 2 applied','good']]},
+  next30:[
+   ['Fix the router rows with a blank status','4 paid guests got no post-program email; more may be hiding','Rion OK → Zapier agent'],
+   ['Square (1:1) creative for the Body Cleanse January ad','The carousel gets cropped in the Instagram feed','Rion + Claude'],
+   ['Google review, Nov 27: themed campaigns, "Retreats" first','One mixed setup → one campaign per program family','Rion + Claude'],
+   ['Match GA4 events to Retreat Guru registrations (~Nov 20)','Decides whether Meta can optimise for registrations','Claude'],
+   ['Chase pending → paid','141 pending booking records','Email team'],
+   ['Silent Dec: early bird closes Dec 9, ads end Dec 12','Early-bird copy must come off on time','Rion'],
+   ['Body Cleanse January to $40/day from Dec 10','Deadline push to Dec 20','Rion'],
+   ['Guest Desk rulebook: deposits, volunteer price, minimum stay','One answer for every guest question','Rion + Romina']]
+};
+const CPA_HIST={l:['Aug 12–31','Aug 31–Sep 15','Sep 15–30','Sep 30–Oct 11'],v:[104,171,218,246]};
+
+/* ---- month-to-date maths ---- */
+let THRU=null,DAYS=30,ELAPSED=30;
+const dim=y=>new Date(Date.UTC(+y.slice(0,4),+y.slice(5,7),0)).getUTCDate();
+const proj=v=>v==null?null:(ELAPSED<DAYS?Math.round(v/ELAPSED*DAYS):v);
+const partial=()=>ELAPSED<DAYS;
+const rng=()=>partial()?'Nov 1–'+ELAPSED:'November';
+
+/* ---- charts ---- */
+const charts={},mk={};
+function base(){const ink2=css('--ink-2'),ink3=css('--ink-3'),rule=css('--rule'),surf=css('--surface'),ink=css('--ink');
+  Chart.defaults.font.family='Inter, system-ui, sans-serif';Chart.defaults.font.size=12;Chart.defaults.color=ink3;
+  return {responsive:true,maintainAspectRatio:false,animation:{duration:reduce?0:900,easing:'easeOutQuart'},interaction:{mode:'index',intersect:false},
+    plugins:{legend:{display:false},tooltip:{backgroundColor:surf,titleColor:ink,bodyColor:ink2,borderColor:rule,borderWidth:1,padding:10,boxPadding:4,callbacks:{}}},
+    scales:{x:{stacked:true,grid:{display:false},border:{color:rule},ticks:{color:ink3,maxRotation:0,autoSkip:true}},y:{stacked:true,grid:{color:rule},border:{display:false},ticks:{color:ink3},beginAtZero:true}}}}
+const bar=(c,d,x)=>Object.assign({data:d,backgroundColor:c,borderRadius:{topLeft:4,topRight:4},borderSkipped:'bottom',maxBarThickness:48},x||{});
+const big=v=>v>=1e6?(v/1e6).toFixed(v%1e6?1:0)+'M':v>=1e3?Math.round(v/1e3)+'K':v;
+/* monthly series: solid = actual, faded extension on the current month = projected month-end */
+function monthly(id,ser,colorVar,unit,opt){opt=opt||{};mk[id]=()=>{if(!ser.l.length)return null;const o=base();const c=css(colorVar);const last=ser.l.length-1,isCur=ser.l[last]===PAGE&&partial();
+  if(opt.big)o.scales.y.ticks.callback=big;
+  const ext=ser.v.map((v,i)=>i===last&&isCur?proj(v)-v:null);
+  o.plugins.tooltip.callbacks.label=i=>i.datasetIndex===0?' '+fmt(i.raw)+' '+unit+(ser.l[i.dataIndex]===PAGE&&partial()?' ('+rng()+')':''):' ~'+fmt(ser.v[i.dataIndex]+i.raw)+' projected for all of November';
+  o.plugins.tooltip.filter=i=>i.raw!=null;
+  return {type:'bar',data:{labels:ser.l.map(ym),datasets:[bar(ser.l.map(k=>k===PAGE?c:c+'99'),ser.v,{borderRadius:ser.v.map((v,i)=>i===last&&isCur?0:{topLeft:4,topRight:4}),maxBarThickness:opt.thin||48}),
+    bar(c+'40',ext,{borderColor:c,borderWidth:1.5,borderDash:[4,3],maxBarThickness:opt.thin||48})]},options:o}}}
+const S={ig:{l:[],v:[]},fol:{l:[],v:[]},msg:{l:[],v:[]},vol:{l:[],v:[]},inq:{l:[],v:[]},book:{l:[],v:[]}};
+monthly('cIgViews',S.ig,'--s3','views',{big:1});monthly('cFollows',S.fol,'--s3','new follows');monthly('cMsgs',S.msg,'--s2','conversations',{thin:30});
+monthly('cVolApps',S.vol,'--s3','applications');monthly('cInq',S.inq,'--s2','inquiries');monthly('cBook',S.book,'--s1','bookings');
+
+mk.cWeekly=()=>{const o=base();const p=WEEKLY.people,tot=p.map(r=>r[1]+r[2]);const add=(tot[tot.length-1]-tot[0])/(p.length-1);
+  const fut=['Nov 20','Nov 27'];const labels=p.map(r=>r[0]).concat(fut);const n=p.length;
+  const projTot=fut.map((_,i)=>Math.round(tot[n-1]+add*(i+1)));
+  o.plugins.tooltip.filter=i=>i.raw!=null;o.plugins.tooltip.callbacks.footer=it=>{const i=it[0].dataIndex;return i<n?'Total: '+tot[i]:'Projected total: ~'+projTot[i-n]};
+  const surf=css('--surface'),i3=css('--ink-3');
+  return {type:'bar',data:{labels,datasets:[
+    bar(css('--s2'),p.map(r=>r[1]).concat([null,null]),{label:'Visitors',borderRadius:0,borderColor:surf,borderWidth:{top:2}}),
+    bar(css('--s3'),p.map(r=>r[2]).concat([null,null]),{label:'Volunteers'}),
+    bar(i3+'40',Array(n).fill(null).concat(projTot),{label:'Projected',borderColor:i3,borderWidth:1.5,borderDash:[4,3]})]},options:o}};
+
+let CPA=null;
+mk.cCpa=()=>{const o=base();o.scales.y.ticks.callback=v=>'$'+v;o.plugins.tooltip.callbacks.label=i=>' $'+i.raw+' per sign-up';const l=CPA_HIST.l.slice(),v=CPA_HIST.v.slice();if(CPA){l.push(rng());v.push(CPA)}
+  const c=css('--s1');return {type:'bar',data:{labels:l,datasets:[bar(l.map((_,i)=>i===l.length-1&&CPA?c:c+'99'),v)]},options:o}};
+
+let BR=null;
+mk.cBrand=()=>{if(!BR)return null;const o=base();o.plugins.tooltip.filter=i=>i.raw!=null;o.plugins.tooltip.callbacks.label=i=>i.datasetIndex===0?' '+fmt(i.raw)+' clicks':' ~'+fmt(BR.nov+i.raw)+' projected for November';const c=css('--s2');
+  return {type:'bar',data:{labels:['October',partial()?rng():'November'],datasets:[bar([c+'99',c],[BR.oct,BR.nov],{borderRadius:partial()?[{topLeft:4,topRight:4},0]:{topLeft:4,topRight:4}}),bar(c+'40',[null,partial()?proj(BR.nov)-BR.nov:null],{borderColor:c,borderWidth:1.5,borderDash:[4,3]})]},options:o}};
+
+mk.cYoY=()=>{const o=base();const y=WEEKLY.yoy;o.indexAxis='y';o.scales={x:{grid:{color:css('--rule')},border:{display:false},ticks:{color:css('--ink-3')},beginAtZero:true},y:{grid:{display:false},ticks:{color:css('--ink-2'),autoSkip:false,font:{size:11}}}};
+  o.plugins.tooltip.callbacks.label=i=>{const r=y[i.dataIndex];return r[4]?(i.datasetIndex===0?' Final count: '+r[1]:' Last season final: '+r[3]):(i.datasetIndex===0?' Now: '+r[1]:' Same date last season: '+r[2])};
+  o.plugins.tooltip.callbacks.footer=it=>{const r=y[it[0].dataIndex];return r[4]?'Started · confirmed year over year':'Last season final: '+r[3]};
+  const g=css('--gold');
+  return {type:'bar',data:{labels:y.map(r=>r[0]+(r[4]?' · final':'')),datasets:[
+    {label:'Now',data:y.map(r=>r[1]),backgroundColor:y.map(r=>r[4]?g:css('--s1')),borderRadius:{topRight:4,bottomRight:4},borderSkipped:'left',barPercentage:.8,categoryPercentage:.75},
+    {label:'Compare',data:y.map(r=>r[4]?r[3]:r[2]),backgroundColor:y.map(r=>r[4]?g+'59':css('--base')),borderRadius:{topRight:4,bottomRight:4},borderSkipped:'left',barPercentage:.8,categoryPercentage:.75}]},options:o}};
+
+mk.cRouter=()=>{const o=base();o.indexAxis='y';o.scales={x:{grid:{color:css('--rule')},border:{display:false},ticks:{color:css('--ink-3')},beginAtZero:true},y:{grid:{display:false},ticks:{color:css('--ink-2')}}};
+  o.plugins.tooltip.callbacks.label=i=>' '+i.raw+' delivered'+(i.dataIndex===1?' (at least)':'');const r=WEEKLY.router.sends;
+  return {type:'bar',data:{labels:r.map(x=>x[0]),datasets:[{data:r.map(x=>x[1]),backgroundColor:r.map(x=>x[1]===0?css('--s1'):css('--s3')),borderRadius:{topRight:4,bottomRight:4},borderSkipped:'left',barPercentage:.7,minBarLength:3}]},options:o}};
+
+function build(id){const el=document.getElementById(id);if(!el||!mk[id]||!window.Chart)return;const cfg=mk[id]();if(charts[id])charts[id].destroy();if(cfg)charts[id]=new Chart(el,cfg)}
+function buildAll(){Object.keys(mk).forEach(build)}
+
+/* ---- static pieces ---- */
+(function(){const st=WEEKLY.status,tot=st.reduce((a,b)=>a+b[1],0),pr=document.getElementById('propStatus'),lg=document.getElementById('propLegend');
+  st.forEach(s=>{const d=document.createElement('div');d.style.flexGrow=s[1];d.style.background='var('+s[2]+')';d.textContent=s[1]/tot>.09?s[1]:'';d.title=s[0]+' '+s[1];pr.appendChild(d);
+    const l=document.createElement('span');l.innerHTML='<i style="background:var('+s[2]+')"></i>'+s[0]+' '+s[1];lg.appendChild(l)});
+  const fu=document.getElementById('funnel'),f0=WEEKLY.funnel[0][1];WEEKLY.funnel.forEach(f=>{const r=document.createElement('div');r.className='frow '+f[2];const w=Math.max(1,f[1]/f0*100);r.innerHTML='<span>'+f[0]+'</span><span class="bar"><i style="width:'+w+'%" data-w="'+w+'"></i></span><span class="n">'+fmt(f[1])+'</span>';fu.appendChild(r)});
+  const conv=document.createElement('div');conv.className='frow';conv.innerHTML='<span><b>Applied → booked</b></span><span></span><span class="n"><b>'+Math.round(WEEKLY.funnel[1][1]/f0*100)+'%</b></span>';fu.appendChild(conv);
+  const nx=document.getElementById('next30');WEEKLY.next30.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML='<td class="w"><b>'+r[0]+'</b></td><td class="w">'+r[1]+'</td><td>'+r[2]+'</td>';nx.appendChild(tr)});
+  const rt=document.getElementById('routerTiles');WEEKLY.router.tiles.forEach(t=>{const d=document.createElement('div');d.className='kpi';d.innerHTML='<span class="v num '+(t[2]==='up'?'up':t[2]==='bad'?'dn':'')+'">'+t[0]+'</span><span class="d">'+t[1]+'</span>';rt.appendChild(d)});
+  const rc=document.getElementById('routerChecks');WEEKLY.router.checks.forEach(c=>{const tr=document.createElement('tr');tr.innerHTML='<td>'+c[0]+'</td><td><span class="chip '+c[2]+'">'+c[1]+'</span></td>';rc.appendChild(tr)});
+})();
+
+/* ---- tiles ---- */
+function tiles(D,P){const el=document.getElementById('tiles');el.innerHTML='';
+  const t=(v,d,cls)=>{const k=document.createElement('div');k.className='kpi';k.innerHTML='<span class="v num '+(cls||'')+'">'+v+'</span><span class="d">'+d+'</span>';el.appendChild(k)};
+  const pace=(v,pv,f)=>{f=f||fmt;return partial()?' · on pace for ~'+f(proj(v))+(pv!=null?' (Oct '+f(pv)+')':''):(pv!=null?' (Oct '+f(pv)+')':'')};const bigF=v=>v>=1e6?(v/1e6).toFixed(2)+'M':Math.round(v/1e3)+'K';
+  const r=rng();
+  if(D.igViews!=null)t(bigF(D.igViews),'Instagram views, '+r+pace(D.igViews,P.igViews,bigF));
+  if(D.usersPerDay!=null)t('~'+fmt(D.usersPerDay),'website users a day, '+r+(P.usersPerDay?' (Oct ~'+fmt(P.usersPerDay)+')':''),D.usersPerDay>(P.usersPerDay||0)?'up':'');
+  const p=WEEKLY.people,last=p[p.length-1],first=p[0];t(fmt(last[1]+last[2]),'people booked for the season, '+last[0]+' ('+(last[1]+last[2]-first[1]-first[2]>=0?'+':'')+(last[1]+last[2]-first[1]-first[2])+' since '+first[0]+')','up');
+  if(D.conversations!=null)t(fmt(D.conversations),'conversations started, '+r+pace(D.conversations,P.conversations));
+  if(D.volunteerApps!=null)t(fmt(D.volunteerApps),'volunteer applications, '+r+pace(D.volunteerApps,P.volunteerApps));
+  if(D.inquiries!=null)t(fmt(D.inquiries),'inquiries, '+r+pace(D.inquiries,P.inquiries));
+  if(D.bookings!=null)t(fmt(D.bookings),'bookings made, '+r+pace(D.bookings,P.bookings));
+  if(D.igFollows!=null)t('+'+fmt(D.igFollows),'new Instagram follows, '+r+(D.igFollowers?' · '+fmt(D.igFollowers)+' followers':''),'up');
+}
+
+/* ---- daily panels (same maths as the cockpit) ---- */
+const odLabel=d=>new Date(d+'T12:00').toLocaleDateString('en-US',{month:'short',day:'numeric'});
+function odLine(days,vals,{H=260,W=460,avg,ref,marker,label='Organic search sessions per day'}={}){
+  const L=34,B=22,n=vals.length,max=Math.max(1,...vals,ref?ref.v:0)*1.1;
+  const x=i=>L+(i/(n-1))*(W-L-8),y=v=>(H-B)-(v/max)*(H-B-6);
+  const step=Math.pow(10,Math.floor(Math.log10(max)))/(max/Math.pow(10,Math.floor(Math.log10(max)))>5?0.5:1)/2;
+  let g='';for(let v=0;v<=max;v+=step)g+=`<line x1="${L}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule)"/><text x="${L-6}" y="${y(v)+3.5}" text-anchor="end">${Math.round(v)}</text>`;
+  days.forEach((d,i)=>{if(d.endsWith('-01')||i===n-1)g+=`<text x="${x(i)}" y="${H-5}" text-anchor="${i===n-1?'end':'middle'}">${odLabel(d)}</text>`});
+  if(marker){const i=days.indexOf(marker.date);if(i>=0)g+=`<line x1="${x(i)}" x2="${x(i)}" y1="4" y2="${H-B}" stroke="var(--s1)" stroke-dasharray="4 4"/><text x="${x(i)+6}" y="14" style="fill:var(--s1)">${marker.text}</text>`}
+  const pts=vals.map((v,i)=>`${x(i)},${y(v)}`).join(' '),area=`${x(0)},${H-B} ${pts} ${x(n-1)},${H-B}`;
+  let a='';if(avg){const ap=avg.map((v,i)=>v==null?null:`${x(i)},${y(v)}`).filter(Boolean).join(' ');a=`<polyline points="${ap}" fill="none" stroke="var(--base)" stroke-width="2" stroke-dasharray="5 4"/>`}
+  if(ref)g+=`<line x1="${L}" x2="${W}" y1="${y(ref.v)}" y2="${y(ref.v)}" stroke="var(--s1)" stroke-width="1.5" stroke-dasharray="6 5"/><text x="${W-4}" y="${y(ref.v)-6}" text-anchor="end" style="fill:var(--s1)">${ref.text}</text>`;
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${label}">${g}<polygon points="${area}" fill="color-mix(in srgb,var(--s3) 14%,transparent)"/><polyline points="${pts}" fill="none" stroke="var(--s3)" stroke-width="2.2"/>${a}<circle cx="${x(n-1)}" cy="${y(vals[n-1])}" r="4" fill="var(--s3)"/></svg>`;
+}
+const ago=u=>{const m=(Date.now()-new Date(u))/6e4;return m<60?Math.max(1,Math.round(m))+' min ago':m<2880?Math.round(m/60)+' h ago':Math.round(m/1440)+' days ago'};
+function applyDaily(o){if(!o||!o.days||!o.days.length)return;
+  const u=o.users,n=u.length;if(u&&n){const avg=Math.round(u.slice(-7).reduce((a,b)=>a+b,0)/7),vs=Math.round((avg/150-1)*100);
+    setT('udLast',String(u[n-1]));setT('udLastL',odLabel(o.days[n-1]));setT('ud7',String(avg));setT('udVs',(vs>=0?'+':'')+vs+'%');
+    const roll=u.map((_,i)=>i<6?null:Math.round(u.slice(i-6,i+1).reduce((a,b)=>a+b,0)/7));
+    document.getElementById('udChart').innerHTML=odLine(o.days,u,{H:240,W:1000,avg:roll,marker:{date:'2026-08-17',text:'Campaigns + posting rhythm on'},label:'Daily website users'});
+    if(o.updatedAt)document.getElementById('udSrc').innerHTML='GA4 · total users by day'+(o.active!=null?' · <b style="color:var(--s3)">'+o.active+' on the site now</b>':'')+' · updated '+ago(o.updatedAt)}
+  const org=o.organic;if(org&&org.length){const m=org.length,a7=Math.round(org.slice(-7).reduce((s,v)=>s+v,0)/7);
+    setT('odLast',String(org[m-1]));setT('odLastL',odLabel(o.days[m-1]));setT('od7',String(a7));setT('odVs',Math.round(a7/220*100)+'%');
+    const roll=org.map((_,i)=>i<6?null:Math.round(org.slice(i-6,i+1).reduce((s,v)=>s+v,0)/7));
+    document.getElementById('odChart').innerHTML=odLine(o.days,org,{avg:roll,ref:{v:220,text:'before Mar 2025 · ~220/day'}});
+    if(o.updatedAt)setT('odSrc','GA4 · updated '+ago(o.updatedAt))}
+  if(o.brand28!=null){setT('kBrand28',fmt(o.brand28));if(o.brandPrev28){const ch=Math.round((o.brand28/o.brandPrev28-1)*100);setT('kBrand28D','brand clicks, last 28 days · '+(ch>=0?'▲ ':'▼ ')+Math.abs(ch)+'% vs the 28 days before'+(o.through?' (through '+odLabel(o.through)+')':''));
+    setT('brandTitle',ch>=0?'More people are searching our name':'Fewer people are searching our name');document.getElementById('brandTitle').insertAdjacentHTML('beforeend','<small>Google clicks on "pachamama" searches</small>')}}
+}
+
+/* ---- feed ---- */
+function applyFeed(f){
+  const mo=f.months||{},D=mo[PAGE];if(!D)return;const P=mo['2026-10']||{};
+  const yms=Object.keys(mo).filter(y=>y<=PAGE).sort();
+  if(f.publishedAt){const pub=new Date(new Date(f.publishedAt).getTime()-6*36e5);const t=new Date(Date.UTC(pub.getUTCFullYear(),pub.getUTCMonth(),pub.getUTCDate()-1));
+    const tym=t.toISOString().slice(0,7);DAYS=dim(PAGE);ELAPSED=tym===PAGE?t.getUTCDate():tym>PAGE?DAYS:DAYS;THRU=t;
+    setT('repUpdated','Updated '+new Date(f.publishedAt).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}))}
+  if(partial()){document.querySelectorAll('.thru').forEach(e=>e.textContent=rng());setT('partRange',rng()+' only');
+    setT('partNote','This is a mid-month refresh: every number covers '+rng()+' ('+ELAPSED+' of '+DAYS+' days), not the full month. Faded bar ends are the month-end projection at the current daily pace. The full November page follows the month-end refresh.')}
+  else{document.querySelectorAll('.thru').forEach(e=>e.textContent='November');document.getElementById('partBar').classList.add('gone')}
+  const put=(s,key,from)=>yms.forEach(y=>{if((!from||y>=from)&&mo[y][key]!=null){s.l.push(y);s.v.push(mo[y][key])}});
+  put(S.ig,'igViews','2025-08');put(S.fol,'igFollows');put(S.msg,'conversations');put(S.vol,'volunteerApps');put(S.inq,'inquiries');put(S.book,'bookings','2026-10');
+  if(D.programRegs&&(D.gSpend!=null||D.mSpend!=null)){CPA=Math.round(((D.gSpend||0)+(D.mSpend||0))/D.programRegs);
+    setT('cpaNote',rng()+': $'+fmt((D.gSpend||0)+(D.mSpend||0))+' spend ÷ '+D.programRegs+' program sign-ups.')}
+  if(D.brandClicks!=null&&P.brandClicks!=null){BR={oct:P.brandClicks,nov:D.brandClicks};setT('kBrandNov',fmt(D.brandClicks));setT('kBrandNovD','brand clicks, '+rng()+(partial()?' · on pace for ~'+fmt(proj(D.brandClicks))+' (Oct '+fmt(P.brandClicks)+')':''))}
+  if(D.igFollowers!=null)setT('followersNow',fmt(D.igFollowers));
+  tiles(D,P);buildAll();
+}
+
+/* ---- scroll ---- */
+const prog=document.getElementById('prog'),bigs=[...document.querySelectorAll('.act .big')],acts=[...document.querySelectorAll('section.act')],links=[...document.querySelectorAll('nav.bar a')];let ticking=false;
+function onScroll(){const h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100).toFixed(1)+'%';let cur=null;acts.forEach(a=>{if(a.getBoundingClientRect().top<window.innerHeight*.45)cur=a.id});links.forEach(l=>l.classList.toggle('on',l.dataset.a===cur));
+  if(!reduce)bigs.forEach(b=>{const r=b.parentElement.getBoundingClientRect();b.style.transform='translateY('+(r.top*-0.18).toFixed(1)+'px)'});ticking=false}
+window.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});onScroll();
+
+buildAll();
+fetch(FEED,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(f=>{if(f){applyFeed(f);applyDaily(f.gaLive)}}).catch(()=>{});
+const rd=()=>{clearTimeout(rd.t);rd.t=setTimeout(buildAll,60)};
+const mq=window.matchMedia('(prefers-color-scheme: dark)');mq.addEventListener&&mq.addEventListener('change',rd);
+})();
+</script>
+</body></html>
